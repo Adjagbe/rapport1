@@ -1,0 +1,19 @@
+<div class="brand-section">
+  <brand />
+</div>
+
+<ul>
+  <li
+    *ngFor="let menu of mainNavigationMenus"
+    [routerLink]="menu.route"
+    routerLinkActive="active"
+    [title]="menu.label"
+  >
+    <a>
+      <ng-container [ngComponentOutlet]="menu.icon" />
+      <span>{{ menu.label }}</span>
+    </a>
+  </li>
+</ul>
+
+<user-menu *ngIf="!isCollapsed" />

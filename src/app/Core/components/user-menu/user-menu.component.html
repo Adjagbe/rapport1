@@ -1,0 +1,41 @@
+<div class="wrapper">
+  <div class="profil-picture">
+    <img src="/assets/images/exemple_avatar.png" alt="photo de profil" />
+  </div>
+  <div class="user-infos">
+    <span class="user-infos__full-name"
+      >{{ users.firstName }} {{ users.lastName }}</span
+    >
+    <span
+      class="badge"
+      [class.exploitant]="users?.profils?.[0]?.code === userProfil.EXPLOITANT"
+      [class.certificateur]="users?.profils?.[0]?.code === userProfil.CERTIFICATEUR"
+      [class.directeur]="users?.profils?.[0]?.code === userProfil.DIRECTEUR"
+      [class.super-admin]="users?.profils?.[0]?.code === userProfil.SUPER_ADMIN"
+      [class.admin]="users?.profils?.[0]?.code === userProfil.ADMIN"
+      >{{ users?.profils?.[0]?.code[0].toUpperCase() + users?.profils?.[0]?.code.slice(1).toLowerCase()}}</span
+    >
+  </div>
+</div>
+<div class="three-dot-icon pointer" (click)="toggleActionMenu()"></div>
+
+<ng-container *ngIf="showActionMenu">
+  <div class="actions-menu">
+    <div class="action-menu__action account-infos" (click)="reload()">
+      <div class="reload-icon"></div>
+      <span>Actualiser les permissions</span>
+    </div>
+    <div class="action-menu__action account-infos">
+      <div class="account-info-icon"></div>
+      <span>Information du compte</span>
+    </div>
+    <div class="action-menu__action reset-password">
+      <div class="reset-password-icon"></div>
+      <span>Changement de mot de passe</span>
+    </div>
+    <div class="action-menu__action logout" (click)="logout()">
+      <div class="logout-icon"></div>
+      <span>Se déconnecter</span>
+    </div>
+  </div>
+</ng-container>

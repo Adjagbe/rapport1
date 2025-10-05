@@ -1,0 +1,57 @@
+<div class="header-group" #headerGroup>
+  <div class="header-group-heading">
+    <div class="header-group-title">
+      <h2>Interface des paramétrages</h2>
+      <p>
+        Gérez les paramètres : ajouter, modifier et/ou supprimer les
+        plateformes
+      </p>
+    </div>
+    <!-- <div class="group-btn">
+      <button
+        class="generic-btn me-4"
+        [variante]="'primary outline'"
+       
+      >
+        <span class="help-icon"></span>
+        <span>Ajouter une plateforme</span>
+      </button>
+    </div> -->
+  </div>
+
+  <div>
+
+    <nav-parametrage />
+
+    <generic-table
+      [datas]="listeApplication"
+      [totalItems]="count" 
+      [nameListe]="'plateformes'"
+      [btnTextCreate]="'Ajouter une plateforme'"
+      [isViewDelete]="true" 
+      [isAction]="true" 
+      [isViewUpdate]="true"
+      [columns]="columnsPlateforme"
+      [totalItems]="count" 
+      [statusClr]="statusColors" 
+      (onSearch)="onSearch($event)"
+      (pageChange)="onPageChange($event)" 
+      (onFilterUser)="onFilterPlateforme()"
+      (onCreateUser)="onCreatePlateforme()" 
+      (editClick)="onEditPlateforme($event)" 
+      (deleteClick)="onDeleteClick($event)"
+      (emitChangeFilter)="onFilterChanged($event)"
+      (lockClick)="lockPlateforme($event)" 
+      (unlockClick)="unlockPlateforme($event)" 
+    />
+    <pagination
+      [currentPage]="currentPage"
+      [totalItems]="count"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    ></pagination> 
+  </div>
+  
+
+
+</div>

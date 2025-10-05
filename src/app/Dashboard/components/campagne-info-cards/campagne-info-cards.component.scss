@@ -1,0 +1,94 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0.75rem;
+
+  & .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  & .head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  & .icon-container {
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  &.card-blue {
+    border: 1px solid #e7e7e7;
+    background: #f1f9fe;
+
+    & .icon-container {
+      background-color: #e3f1fb;
+    }
+  }
+
+  &.card-pink {
+    border: 1px solid #e7e7e7;
+    background: #fef1fa;
+    & .icon-container {
+      background-color: #fee5f6;
+    }
+  }
+
+  &.card-purple {
+    border-radius: 0.5rem;
+    border: 1px solid #e7e7e7;
+    background: #f7f5fd;
+    & .icon-container {
+      background-color: #f1edfa;
+    }
+  }
+
+  &.card-green {
+    border: 1px solid #e7e7e7;
+    background: #eefbf3;
+
+    & .icon-container {
+      background-color: #d7f4e1;
+    }
+  }
+
+  &.card-yellow {
+    border: 1px solid #e7e7e7;
+    background: #fffeea;
+
+    & .icon-container {
+      background-color: #fffac5;
+    }
+  }
+
+  &.card-grey {
+    border-radius: 0.5rem;
+    border: 1px solid #e7e7e7;
+    background: #f6f6f6;
+    & .icon-container {
+      background-color: #e7e7e7;
+    }
+  }
+
+  &.card-orange {
+    border-radius: 0.5rem;
+    border: 1px solid #e7e7e7;
+    background: #fff9f4;
+    & .icon-container {
+      background-color: #ffe5d3;
+    }
+  }
+  &.card-red {
+    border-radius: 0.5rem;
+    border: 1px solid #e7e7e7;
+    background: rgba(255, 240, 240, 1);
+    & .icon-container {
+      background-color: #fdd;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="offer-header">
+  <h3>{{ selectedUser?.lastName ?? "--" }} {{ selectedUser?.firstName ?? "--" }}</h3>
+  <div
+    class="offer-header__statu"
+    [class.go]="selectedUser?.isActif=== true"
+    [class.nogo]="selectedUser?.isActif === false"
+  >
+    <span>{{ selectedUser ? (selectedUser.isActif ? 'Actif' : 'Inactif') : '--' }}</span>
+  </div>
+</div>
+<div class="offer-content">
+  <div class="offer-content__rows">
+    <div class="offer-content__row">
+      <span>Login</span>
+      <span>{{ selectedUser?.login ?? "--" }}</span>
+    </div>
+    <div class="offer-content__row">
+      <span>Email</span>
+      <span>{{ selectedUser?.email ?? "--" }}</span>
+    </div>
+    <div class="offer-content__row">
+      <span>Telephone</span>
+      <span>{{ selectedUser?.telephone ?? "--" }}</span>
+    </div>
+    <div class="offer-content__row">
+      <span>Date de création</span>
+      <span>{{ selectedUser?.createdAt }}</span>
+    </div>
+    <div class="offer-content__row">
+      <span>Rôle</span>
+      <span>{{ selectedUser?.fonction ?? "--" }}</span>
+    </div>
+    <div class="offer-content__row">
+      <span>Direction</span>
+      <span>{{ selectedUser?.originHierarchieDescription ?? "--" }}</span>
+    </div>
+  </div>
+</div>

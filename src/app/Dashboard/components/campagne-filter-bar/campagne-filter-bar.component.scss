@@ -1,0 +1,21 @@
+:host {
+  display: grid;
+  grid-template-columns: 60% 1fr;
+  align-items: end;
+  gap: 1.3rem;
+
+  & .date-filter {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.625rem;
+    margin-block-end: 0.3125rem;
+  }
+  & [type="text"] {
+    border: 2px solid var(--clr-grey) !important;
+  }
+
+  @media (max-width: 1230px) {
+    grid-template-columns: 1fr;
+  }
+}

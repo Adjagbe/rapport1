@@ -1,0 +1,88 @@
+:host {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  width: 100%;
+  // align-content: flex-start;
+  margin-block: 2.2rem;
+  padding-inline: 0.715rem;
+  overflow-y: scroll;
+  max-height: 100dvh;
+
+  /* Masquer la barre de défilement */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE et Edge */
+  scrollbar-width: none; /* Firefox */
+
+  & .btn-download {
+    outline: 2px solid var(--clr-grey);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #2b2b2e;
+    &:hover {
+      outline: 2px solid var(--clr-dark);
+      color: var(--clr-dark);
+    }
+  }
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  & .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.675rem;
+  }
+
+  & span.heading {
+    font-weight: 700;
+  }
+
+  & .table-container {
+    display: grid;
+    gap: 2rem;
+  }
+
+  & .upload-file-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: start;
+
+    gap: 0.715rem 0px;
+    border-radius: 0.625rem;
+    border: 2px solid var(--clr-grey);
+    padding: 0.625rem;
+
+    & h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+  }
+  & .upload-file__infos {
+    gap: 1rem;
+  }
+  & .upload-file__infos-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  & .upload-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.25rem;
+    border: 2px solid var(--clr-grey);
+    padding: 0.625rem;
+  }
+}

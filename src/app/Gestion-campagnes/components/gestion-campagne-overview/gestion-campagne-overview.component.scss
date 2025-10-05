@@ -1,0 +1,34 @@
+:host {
+  display: grid;
+  grid-template-rows: auto auto 3fr;
+  gap: 2rem 0;
+  height: 100%;
+
+  & .campagne-overview-layout {
+    display: grid;
+    height: 100dvh;
+  }
+
+  & .campagne-overview-layout.show-app-list {
+    grid-template-columns: 23% 20% 1fr;
+  }
+
+  & .campagne-overview-layout.show-campagne-details {
+    grid-template-columns: 30% 1fr;
+  }
+
+  & .campagne-overview-layout.show-campagne-list {
+    grid-template-columns: 1fr;
+  }
+
+  & campagne-list {
+    flex-grow: 1;
+  }
+  & campagne-details {
+    flex-grow: 1;
+  }
+
+  & app-details {
+    flex-grow: 3;
+  }
+}

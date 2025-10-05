@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  width: min(600px, 100%);
+
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 7px 27px 5px rgba(0, 0, 0, 0.05);
+  padding: 50px;
+
+  
+  h2 {
+    text-align: center;
+  }
+
+  span {
+     text-align: end;
+  a {
+    color: var(--clr-primary);
+    text-decoration: dashed;
+  }
+}
+
+  & .ldap-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
+    background-color: var(--clr-grey);
+    border-radius: 4px;
+
+    span {
+      padding-block-end: 4px;
+    }
+  }
+
+  & form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 0;
+  }
+
+  // .input {
+  //   width: 100%;
+  //   outline: 1px solid rgba(0, 0, 0, 0.1);
+  // }
+
+  .hidde-icon{
+    position: relative;
+    bottom: 4px;
+  }
+  
+}

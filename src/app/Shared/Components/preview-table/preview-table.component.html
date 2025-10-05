@@ -1,0 +1,113 @@
+<div class="preview-table-container">
+  <div class="table-heading">
+    <div class="text-container">
+      <span>Total des éléments: </span>
+      <small>({{ totalItems() }})</small>
+    </div>
+    <div class="filter-container">
+      <div class="d-flex gap-4">
+        <select [formControl]="filterSelectController">
+          <option *ngFor="let col of columns" [value]="col.key">
+            {{ col.label }}
+          </option>
+        </select>
+        <input
+          type="text"
+          [placeholder]="getFilterPlaceholder()"
+          [formControl]="filterInputController"
+          *ngIf="!isStatusFilterSelected()"
+        />
+        <select
+          [formControl]="filterSelectController2"
+          *ngIf="isStatusFilterSelected()"
+        >
+          <option value="CERTIFIED">Certifiés</option>
+          <option value="NOT_CERTIFIED">Non certifié</option>
+          <option value="">Tous</option>
+        </select>
+        <button
+          type="button"
+          class="generic-btn"
+          variante="tertiary"
+          (click)="onFilterClick()"
+        >
+          filtrer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-scroll-container rounded" [style.max-height]="maxHeight">
+    <table>
+      <thead>
+        <tr>
+          <th class="index-column"><span>#</span></th>
+          <th
+            *ngFor="let col of columns"
+            [class.sortable]="col.sortable"
+            (click)="col.sortable ? onSort(col) : null"
+          >
+            <div style="display: flex; align-items: center; gap: 0.675rem">
+              <span>{{ col.label }}</span>
+              <div *ngIf="col.sortable">
+                <svg
+                  *ngIf="!col.isDescending && col.isDescending !== false"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9.75V4.36875L4.06875 6.3L3 5.25L6.75 1.5L10.5 5.25L9.43125 6.3L7.5 4.36875V9.75H6ZM11.25 16.5L7.5 12.75L8.56875 11.7L10.5 13.6313V8.25H12V13.6313L13.9313 11.7L15 12.75L11.25 16.5Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of paginatedData(); index as i">
+          <td>{{ i + 1 }}</td>
+          <td *ngFor="let col of columns">
+            <span class="cell-content" [title]="row?.[col.key]">
+              {{
+                row[col.key] !== null && row[col.key] !== undefined
+                  ? row[col.key]
+                  : "---"
+              }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!paginatedData().length" class="no-data">
+      <p class="text-muted">
+        {{
+          filteredData().length === 0
+            ? "Aucune donnée trouvée"
+            : "Aucune donnée sur cette page"
+        }}
+      </p>
+    </div>
+  </div>
+
+  <div class="pagination-container" *ngIf="totalPages() > 1">
+    <pagination
+      [totalItems]="totalItems()"
+      [pageSize]="pageSize"
+      [currentPage]="currentPage()"
+      (pageChange)="onPageChange($event)"
+    ></pagination>
+  </div>
+
+  <div class="pagination-info">
+    <small class="text-muted">
+      Affichage de {{ startItemIndex }} à {{ endItemIndex }} sur
+      {{ totalItems() }} éléments
+    </small>
+  </div>
+</div>

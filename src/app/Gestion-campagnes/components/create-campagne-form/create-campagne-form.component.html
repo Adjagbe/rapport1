@@ -1,0 +1,210 @@
+<modal-layout
+  heading="Créer une nouvelle campagne"
+  subHeading="Définissez les paramètres de votre campagne de certification"
+>
+  <ng-container>
+    <form [formGroup]="campagneForm" (ngSubmit)="onSub()">
+      <error-message
+        [errorMessage]="ErrorMsg"
+        *ngIf="
+          (showErrorMsg && campagneForm.invalid) || invalidFie || invalidDate
+        "
+      />
+      <!-- DIV FOR CAMPAGNE NAME -->
+      <div class="campagne_name">
+        <form-control label="Nom de la campagne">
+          <input
+            type="text"
+            id="Nom de la campagne"
+            placeholder="ex: Certification Q2 2025"
+            formControlName="name"
+            class="input"
+            #campagneName
+          />
+        </form-control>
+        <small
+          class="campagne_error-msg"
+          *ngIf="(nameCtrl.touched || nameCtrl.dirty) && nameCtrl.invalid"
+        >
+          <ng-container *ngIf="nameCtrl.errors as e">
+            <ng-container *ngIf="e['required']; else notRequired">
+              Nom de la campagne est obligatoire
+            </ng-container>
+            <ng-template #notRequired>
+              <ng-container *ngIf="e['leadingSpace']; else notLeadingSpace">
+                Nom de la campagne ne doit pas commencer par un espace
+              </ng-container>
+            </ng-template>
+            <ng-template #notLeadingSpace>
+              <ng-container *ngIf="e['minLengthStrict']; else fallbackRequired">
+                Nom de la campagne doit contenir au moins
+                {{ e["minLengthStrict"]?.requiredLength }} caractères
+              </ng-container>
+            </ng-template>
+            <ng-template #fallbackRequired
+              >Nom de la campagne est obligatoire</ng-template
+            >
+          </ng-container>
+        </small>
+      </div>
+      <!-- DIV FOR APPLIST -->
+      <div class="campagne_app">
+        <form-control
+          label="Applications à certifier"
+          subLabel="Recherchez et sélectionnez les applications, puis importez les fichiers d'utilisateurs pour chacune"
+        >
+          <ng-select
+            [items]="appSugestionsList"
+            bindLabel="label"
+            bindValue="value"
+            [multiple]="true"
+            [formControl]="selectedAppsControl"
+          />
+        </form-control>
+        <small
+          class="campagne_error-msg"
+          *ngIf="
+            (applicationsArray.touched || applicationsArray.dirty) &&
+            applicationsArray.invalid
+          "
+        >
+          <ng-container *ngIf="applicationsArray.errors?.['required']">
+            Applications à certifier est obligatoire
+          </ng-container>
+        </small>
+        <div class="campagne_app-sugestions scroll-bar-hidden">
+          <span>Suggestions:</span>
+          <div>
+            <span
+              *ngFor="let app of appSugestionsList.slice(0, 5)"
+              (click)="setSelectedSuggestion(app)"
+              [class.active]="selectedAppsControl.value!.includes(app.value)"
+              class="badge d-flex align-items-center gap-1"
+            >
+              <div
+                class="valid-icon"
+                *ngIf="selectedAppsControl.value!.includes(app.value)"
+              ></div>
+              <small>{{ app.label }}</small>
+            </span>
+          </div>
+        </div>
+        <div class="campagne_app-list">
+          <div class="campagne_empty" *ngIf="!applicationsArray.length">
+            <div class="search-icon"></div>
+            <span
+              >Utilisez la barre de recherche ci-dessus pour ajouter des
+              applications</span
+            >
+          </div>
+          <div
+            class="campagne_fill scroll-bar-hidden"
+            *ngIf="applicationsArray.controls.length"
+          >
+            <selected-app-card
+              *ngFor="let ctrl of applicationsArray.controls; let i = index"
+              [name]="ctrl.value?.name ?? ''"
+              [fileName]="ctrl.value?.File?.name ?? ''"
+            >
+              <div class="campagne_fill__actions">
+                <label [for]="'fileInput' + i">
+                  <div *ngIf="!ctrl.value?.File" class="download-icon"></div>
+                  <div *ngIf="ctrl.value?.File" class="reload-icon"></div>
+                  <span>{{ ctrl.value?.File ? "Remplacer" : "Fichier" }}</span>
+                </label>
+                <input
+                  type="file"
+                  style="display: none"
+                  [id]="'fileInput' + i"
+                  [accept]="onlyExcelFile"
+                  (change)="onFileChange($event, ctrl)"
+                  #fileInput
+                />
+                <ng-container slot="preview">
+                  <span
+                    *ngIf="ctrl.value?.File"
+                    class="preview-btn"
+                    (click)="onPreviewFile(ctrl)"
+                  >
+                    <div class="preview-icon"></div>
+                  </span>
+                </ng-container>
+                <button
+                  *ngIf="false"
+                  class="generic-btn"
+                  variante="primary"
+                  text="prévisualise"
+                  type="button"
+                  (click)="onPreviewFile(ctrl)"
+                ></button>
+                <div class="close-icon" (click)="onRemove(ctrl)"></div>
+              </div>
+            </selected-app-card>
+          </div>
+        </div>
+      </div>
+      <!-- DIV FOR DATES -->
+      <div class="campagne_date">
+        <div class="campagne_date-container">
+          <form-control label="Date de début">
+            <input
+              type="date"
+              id="Date début"
+              placeholder="ex: Certification Q2 2025"
+              formControlName="createdAt"
+              [min]="minCreatedAt"
+            />
+          </form-control>
+          <small
+            class="campagne_error-msg"
+            *ngIf="
+              (createdAtCtrl.touched || createdAtCtrl.dirty) &&
+              createdAtCtrl.invalid
+            "
+          >
+            <ng-container *ngIf="createdAtCtrl.errors?.['required']">
+              Date de début est obligatoire
+            </ng-container>
+          </small>
+        </div>
+
+        <div class="campagne_date-container">
+          <form-control label="Date de fin (prévisionnelle)">
+            <input
+              type="date"
+              id="Date de fin (prévisionnelle)"
+              placeholder="ex: Certification Q2 2025"
+              formControlName="endAt"
+              [min]="minCreatedAt"
+            />
+          </form-control>
+
+          <small
+            class="campagne_error-msg"
+            *ngIf="(endAtCtrl.touched || endAtCtrl.dirty) && endAtCtrl.invalid"
+          >
+            <ng-container *ngIf="endAtCtrl.errors?.['required']">
+              Date de fin (prévisionnelle) est obligatoire
+            </ng-container>
+          </small>
+        </div>
+      </div>
+      <!-- DIV FOR BTN -->
+      <div class="campagne_btn-container">
+        <button
+          (click)="cancel($event)"
+          class="generic-btn"
+          variante="tertiary muted"
+          text="Annuler"
+          type="button"
+        ></button>
+        <button
+          class="generic-btn"
+          variante="primary"
+          text="créer la campagne"
+          type="submit"
+        ></button>
+      </div>
+    </form>
+  </ng-container>
+</modal-layout>

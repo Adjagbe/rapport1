@@ -1,0 +1,22 @@
+<form [formGroup]="forgotForm" (submit)="onSubmit()">
+  <error-message [errorMessage]="errorMessage" *ngIf="showErrorMessage" />
+  <h2>Réinitialisation du mot de passe</h2>
+  <p>Entrez votre login pour procéder à la réinitialisation</p>
+  <form-control label="login">
+    <input #loginInput type="text" id="login" placeholder="Entrer votre identifiant" formControlName="login" />
+  </form-control>
+  <button
+    class="generic-btn"
+    variante="primary"
+    text="Suivant"
+    type="submit"
+    [disabled]="  forgotForm.invalid"
+  ></button>
+  <button
+    class="generic-btn"
+    variante="tertiary"
+    text="Retour"
+    type="button"
+    (click)="onLogin()"
+  ></button>
+</form>

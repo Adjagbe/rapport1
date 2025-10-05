@@ -1,0 +1,61 @@
+<div class="node-card" *ngIf="node">
+  <div class="card text-center">
+    <div class="card-body">
+      <p class="card-text fw-bold"> Question {{ node.orderInFlow }}</p>
+      <p class="card-text">{{ node.questionText }}</p>
+
+      <!-- Boutons d'action -->
+      <div class="d-flex justify-content-center gap-5">
+        <button (click)="editQuestionNode(node)"  placement="bottom" ngbTooltip="Modifier" class="btn btn-sm btn-outline-secondary action-btn">
+          <span class="edit-icon"></span>
+        </button>
+        <!-- <button (click)="editQuestionNode2()" class="btn btn-sm btn-outline-secondary action-btn">
+          <span class="edit-icon"></span>
+        </button> -->
+        <button (click)="addQuestionNode(node)" placement="bottom" ngbTooltip="Assigner" class="btn btn-sm action-btn btn-outline-secondary ">
+          <span class="plus-component"></span>
+        </button>
+        <button (click)="deleteQuestionNode(node)" placement="bottom" ngbTooltip="Supprimer" class="btn action-btn btn-sm">
+          <span class="trash-icon"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enfants Oui / Non -->
+  <div class="children"  [ngStyle]="{
+       '--line-left': (100 / (node.options?.length * 2)) + '%',
+       '--line-right': (100 / (node.options?.length * 2)) + '%'
+     }">
+    <ng-container *ngFor="let option of node.options">
+      <div class="child">
+        <span class="label">{{ option.optionText }}</span>
+
+        <!-- Si nextQuestion existe -->
+        <ng-container *ngIf="option.nextQuestion; else noNext">
+          <app-organization [node]="option.nextQuestion" (reloadDataQ)="onReloadDataQFromChild()"></app-organization>
+        </ng-container>
+
+        <!-- Sinon afficher "active" -->
+        <ng-template #noNext>
+          <div [ngStyle]="{
+            'color':option.warningColor?.fontColor
+          }" class="text-placeholder fw-bold ">{{option.displayValue}}</div>
+        </ng-template>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Action finale -->
+  <div *ngIf="node.action" class="mt-2 text-purple fw-bold">
+    {{ node.action }}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center " *ngIf="!node">
+  <button
+    (click)="addQuestionNode2()"
+    class="generic-btn">
+    Assigner une question
+  </button>
+</div>

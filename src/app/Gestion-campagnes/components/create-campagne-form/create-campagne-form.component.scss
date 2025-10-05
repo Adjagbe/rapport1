@@ -1,0 +1,187 @@
+:host {
+  display: block;
+  padding-block-end: 1.5rem;
+
+  & form {
+    padding-inline: 2rem;
+    display: grid;
+    gap: 2rem 0px;
+  }
+
+  & .preview-btn {
+    display: flex;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    color: var(--clr-dark);
+    gap: 8px;
+    border: 1px solid rgba(231, 231, 231, 1);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    // position: absolute;
+    left: 40%;
+
+    &:hover {
+      background-color: var(--clr-primary-100);
+    }
+  }
+
+  & label {
+    background-color: var(--clr-dark);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  & .close-icon {
+    cursor: pointer;
+    &:hover {
+      background: var(--clr-red-100);
+    }
+  }
+
+  & .campagne {
+    &_btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    &_date-container {
+      width: 50%;
+    }
+
+    &_error-msg {
+      color: var(--clr-red);
+      margin-block-end: 0.75rem;
+    }
+
+    &_date {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    &_app {
+      display: grid;
+      gap: 0.5rem 0px;
+    }
+
+    &_app :is(ng-select) {
+      width: 100% !important;
+    }
+
+    &_app-sugestions {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 0.715rem;
+    }
+
+    &_app-sugestions span.badge {
+      cursor: pointer;
+      &:hover {
+        background-color: var(--clr-dark);
+        color: #fff;
+      }
+
+      &.active {
+        background-color: var(--clr-dark) !important;
+        color: #fff !important;
+      }
+    }
+
+    &_app-sugestions > div {
+      width: 100%;
+      overflow-x: scroll;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Cacher la scrollbar pour Firefox */
+      scrollbar-width: none;
+
+      /* Cacher la scrollbar pour IE et Edge Legacy */
+      -ms-overflow-style: none;
+    }
+
+    &_empty {
+      border-radius: 8px;
+      border: 2px dashed #d1d1d1;
+      padding: 2.3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &_fill {
+      display: grid;
+      align-content: start;
+      gap: 0.625rem 0rem;
+      max-height: 12.75rem;
+      overflow-y: scroll;
+      padding-block: 1rem;
+      /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      /* Cacher la scrollbar pour Firefox */
+      scrollbar-width: none;
+
+      /* Cacher la scrollbar pour IE et Edge Legacy */
+      -ms-overflow-style: none;
+    }
+  }
+  & .campagne_fill__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+}
+
+/* Styles des jours désactivés dans le calendrier ng-bootstrap */
+:host ::ng-deep .ngb-dp-day.disabled,
+:host ::ng-deep .ngb-dp-day[aria-disabled="true"] {
+  color: #9aa0a6 !important;
+  opacity: 0.55;
+  cursor: not-allowed !important;
+}
+
+/* Capper la hauteur de la zone de valeurs sélectionnées (ng-select multi) et activer le scroll */
+:host
+  ::ng-deep
+  ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container {
+  display: flex !important;
+  flex-wrap: wrap !important; /* chips sur plusieurs lignes */
+  height: 100% !important; /* cap */
+  overflow-x: hidden !important;
+  overflow-y: scroll !important; /* scroll vertical */
+  -webkit-overflow-scrolling: touch !important;
+  margin-block: 0 !important;
+}
+
+/* Les chips ne doivent pas se réduire/forcer le wrap */
+:host
+  ::ng-deep
+  ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  flex: 0 0 auto !important;
+  display: inline-flex !important;
+}

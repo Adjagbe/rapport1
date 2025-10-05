@@ -1,0 +1,35 @@
+:host {
+  display: grid;
+  grid-template-rows: auto auto 3fr;
+  gap: 2rem 0;
+  height: 100%;
+
+  & .certification-overview-layout {
+    display: grid;
+    gap: 16px;
+    height: 100vh;
+    max-width: 100vw;
+  }
+
+  & .certification-overview-layout.show-certification-list {
+    grid-template-columns: 1fr;
+  }
+
+  & .certification-overview-layout.show-certification-details {
+    grid-template-columns: 30% 1fr;
+  }
+
+  & .certification-overview-layout.show-app-list {
+    grid-template-columns: 20% 20% 1fr;
+  }
+
+  & certification-list {
+    flex-grow: 1;
+  }
+  & certification-details {
+    flex-grow: 1;
+  }
+  & app-details {
+    flex-grow: 3;
+  }
+}

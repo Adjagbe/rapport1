@@ -1,0 +1,24 @@
+<ng-container [formGroup]="filterCampagne">
+  <input
+    type="text"
+    placeholder="Rechercher une campagnes"
+    formControlName="search"
+  />
+
+  <div class="date-filter">
+    <form-control label="Date début" [isRequired]="false">
+      <input type="date" id="Date début" formControlName="startDate" />
+    </form-control>
+    <form-control label="Date fin" [isRequired]="false">
+      <input type="date" id="Date fin" formControlName="estimatedEndDate" />
+    </form-control>
+    <button
+      class="generic-btn"
+      variante="tertiary muted"
+      type="button"
+      (click)="reloadDashboard()"
+    >
+      <div class="reload-icon"></div>
+    </button>
+  </div>
+</ng-container>

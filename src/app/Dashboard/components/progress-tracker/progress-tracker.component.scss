@@ -1,0 +1,158 @@
+:host {
+  display: grid;
+  align-content: start;
+  gap: 1rem 0;
+  padding: 0.75rem;
+
+  border-radius: 0.5rem;
+  border: 1.7px solid #e7e7e7;
+  max-height: 301.2px;
+
+  position: relative;
+
+  & .header {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    &__heading {
+      grid-column: span 8;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    &__title {
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    &__dates {
+      color: rgba(61, 61, 61, 1);
+    }
+
+    &__status {
+      grid-column: span 4;
+      justify-self: end;
+    }
+  }
+
+  & .content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  & .content {
+    &__progress-bar {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    &__progess-bar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-title,
+      &-value {
+        font-size: 0.875rem;
+        font-weight: 700;
+      }
+    }
+
+    &__progress-bar-content {
+      position: relative;
+      height: 0.75rem;
+      border-radius: 99px;
+      background-color: #f6f6f6;
+
+      & .content__progress {
+        position: absolute;
+        height: 100%;
+        background-color: rgba(35, 154, 212, 1);
+        border-radius: 99px;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+      }
+    }
+
+    &__global-progress {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 0.75rem;
+
+      & span {
+        grid-column: span 6;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: rgba(61, 61, 61, 1);
+        &.green {
+          background-color: #d7f4e1;
+        }
+
+        &.pink {
+          background-color: #fee5f6;
+        }
+      }
+    }
+  }
+  & .footer {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 0.75rem;
+
+    & [text="Voir les détails"] {
+      grid-column: span 8;
+    }
+    & [text="Exporter"] {
+      grid-column: span 4;
+    }
+  }
+
+  & .actions-menu {
+    position: absolute;
+    bottom: -90px;
+    right: -26px;
+    border-radius: 12px;
+    border: 2px solid #f6f6f6;
+    background: #fdfdfd;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.11);
+    z-index: 1000;
+    display: none;
+    padding: 0.5rem;
+
+    &.show-actions {
+      display: block;
+    }
+  }
+
+  & .action-menu {
+    position: absolute;
+    flex-direction: column;
+    align-content: start;
+    gap: 1rem;
+    &__action {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+
+      & div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &:hover {
+        background-color: var(--clr-grey-100);
+      }
+
+      &.logout {
+        color: var(--clr-red);
+      }
+    }
+  }
+}

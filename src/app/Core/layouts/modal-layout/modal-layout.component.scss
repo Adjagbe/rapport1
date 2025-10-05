@@ -1,0 +1,28 @@
+:host {
+  display: grid;
+  grid-template-rows: minmax(0, 72px) 1fr;
+  align-content: start;
+  gap: 2rem 0px;
+
+  & .heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    padding-block: 0.62rem;
+    background-color: #f6f6f6;
+  }
+
+  & .heading h2 {
+    font-weight: 600;
+  }
+
+  & .heading small {
+    color: #3d3d3d;
+    font-size: 0.875rem;
+  }
+
+  & .heading div:last-child {
+    cursor: pointer;
+  }
+}

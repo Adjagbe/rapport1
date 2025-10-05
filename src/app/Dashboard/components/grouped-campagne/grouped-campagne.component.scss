@@ -1,0 +1,44 @@
+:host {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.5rem;
+  padding-block-end: 2rem;
+  margin-block-start: 2rem;
+
+  & container-card {
+    grid-column: span 4;
+
+    @media (max-width: 1200px) {
+      grid-column: span 6;
+    }
+
+    @media (max-width: 895px) {
+      grid-column: span 12;
+    }
+  }
+
+  & pagination {
+    align-self: end;
+  }
+
+  & .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+
+    img {
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.9rem;
+      margin: 0;
+    }
+  }
+}

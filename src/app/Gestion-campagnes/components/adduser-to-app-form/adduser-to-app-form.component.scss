@@ -1,0 +1,90 @@
+:host {
+  padding-block-end: 1.5rem;
+  & form {
+    padding-inline: 2rem;
+    display: grid;
+    gap: 2rem 0px;
+  }
+
+  & .preview-zone {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-height: 16.875rem;
+    overflow-y: scroll;
+    gap: 0.715rem;
+    padding: 0.325rem;
+
+    /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Cacher la scrollbar pour Firefox */
+    scrollbar-width: none;
+
+    /* Cacher la scrollbar pour IE et Edge Legacy */
+    -ms-overflow-style: none;
+  }
+
+  & .preview-zone span.heading {
+    font-weight: 700;
+    font-size: 0.875;
+  }
+
+  & form .campagne_btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  & .text-container {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  & .file-drop-zone {
+    border: 3px dashed #aaa;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    text-align: center;
+    margin-block: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.675rem;
+  }
+
+  & .advice-zone {
+    background-color: var(--clr-blue-50);
+    border: 1px solid var(--clr-blue-200);
+    border-radius: 0.5rem;
+    padding-block: 1rem;
+    padding-inline: 0.715rem;
+
+    & h3 {
+      color: #0e2d43;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    & span {
+      color: #0e2d43;
+      font-size: 0.925rem;
+      font-weight: 500;
+    }
+  }
+
+  & input[type="file"] {
+    display: none;
+  }
+
+  & .file-drop-zone.drag-over {
+    border-color: var(--clr-blue-400, #007bff);
+    background-color: #f0f8ff;
+  }
+}

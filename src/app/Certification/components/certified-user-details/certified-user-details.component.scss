@@ -1,0 +1,244 @@
+:host {
+  & .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100%;
+    padding-block-end: 1.2rem;
+    gap: 1.2rem;
+    padding-inline: 2rem;
+
+    & > div:not(.action) {
+      padding: 0.75rem;
+    }
+
+    & .commentaire-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      & .commentaire {
+        background-color: rgba(0, 0, 0, 0.06);
+        padding: 0.75rem;
+        color: var(--clr-dark);
+        border-radius: 0.25rem;
+      }
+    }
+  }
+
+  & .boolean-response {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+
+    & span.positive {
+      color: var(--clr-green);
+    }
+    & span.negative {
+      color: var(--clr-red);
+    }
+  }
+  & .label {
+    font-size: 0.8125rem;
+  }
+
+  & h3 {
+    font-size: 1.125rem;
+  }
+
+  & .label,
+  h3 {
+    font-weight: 600;
+  }
+
+  & span.response,
+  span.value {
+    color: rgba(109, 109, 109, 1);
+  }
+
+  & .accounts-infos {
+    border-radius: 0.5rem;
+    border: 2px solid var(--clr-grey);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.125rem;
+
+    h3 {
+      grid-column: span 12;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .left,
+    .right {
+      grid-column: span 6;
+    }
+
+    .left > div,
+    .right > div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+
+  & .status-info {
+    border-radius: 0.5rem;
+    border: 2px solid #50be87;
+    background: #eefbf3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 0.975rem !important;
+
+    & > div:not(.commentaire) {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    & .badge.success {
+      border-radius: 0.25em !important;
+      background: rgba(80, 190, 135, 0.12) !important;
+      color: #28a169 !important;
+    }
+  }
+
+  & .questions-list {
+    max-height: 15rem;
+    overflow: auto;
+
+    border-radius: 0.5rem;
+    border: 1px solid var(--clr-grey);
+    padding: 0.75rem;
+
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    /* Masquer la scrollbar pour les navigateurs Webkit */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Masquer la scrollbar pour Firefox */
+    scrollbar-width: none;
+
+    /* Masquer la scrollbar pour IE et Edge */
+    -ms-overflow-style: none;
+
+    & h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      grid-column: span 12;
+    }
+
+    & .questions-list-content {
+      grid-column: span 12;
+    }
+
+    & .grid-header,
+    & .grid-row {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      border: 1px solid #e7e7e7;
+      background: #fdfdfd;
+      padding: 0.875rem 0.687rem;
+      gap: 0px 0.625rem;
+    }
+
+    & .header-cell,
+    .grid-cell {
+      grid-column: span 3;
+    }
+
+    & .questions-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem 0px;
+      position: relative;
+    }
+
+    & .grid-header {
+      position: sticky;
+      top: -12px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    & .question-header,
+    .question-cell {
+      grid-column: span 6;
+    }
+
+    & .tooltip-trigger {
+      cursor: pointer;
+      position: relative;
+    }
+
+    & .grid-header {
+      border: none;
+    }
+
+    & .header-cell {
+      font-weight: 600;
+    }
+  }
+  & .action {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  // Tooltip styles
+  & .tooltip {
+    position: fixed;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    pointer-events: none;
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    & .tooltip-content {
+      background: #fdfdfd;
+      border: 1px solid #e7e7e7;
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #333;
+      max-width: 300px;
+      word-wrap: break-word;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 20px;
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #fdfdfd;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 20px;
+        width: 0;
+        height: 0;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #e7e7e7;
+      }
+    }
+  }
+}

@@ -1,0 +1,342 @@
+/* You can add global styles to this file, and also import other style files */
+@use "./assets/styles/reset.style.scss";
+@use "/src/assets/styles/fonts.style.scss";
+@use "/src/assets/styles/theme.style.scss";
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+/* Règle globale pour appliquer Roboto à tous les éléments */
+* {
+  font-family: "Roboto" !important;
+}
+
+.none {
+  display: none !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+small.error-message {
+  color: var(--clr-red);
+  display: block;
+  width: fit-content;
+  margin-block: 0.625rem;
+}
+
+.ellipsis {
+  display: inline-block;
+  max-width: 150px; /* Ajuste la largeur selon ton besoin */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 0.512rem;
+  border: none;
+  outline: 1px solid #e7e7e7;
+  border-radius: 8px;
+  outline: none;
+
+  &:hover {
+    background-color: rgb(246 246 246);
+  }
+}
+
+/* Style global pour ng-select pour ressembler aux input */
+.ng-select {
+  display: block !important;
+  width: 100% !important;
+  /* padding: 0.512rem 0.75rem !important; */
+  border: none !important;
+  /* outline: 1px solid #e7e7e7 !important; */
+  border-radius: 8px !important;
+  background: #fff !important;
+  min-height: 28px !important;
+  height: 100%;
+  font-size: 1rem !important;
+  box-shadow: none !important;
+  transition: background 0.2s !important;
+  margin-block: 0.625rem;
+  padding-block-start: 0.325rem;
+  padding-left: 0.9rem;
+}
+
+.ng-select:hover,
+.ng-select.ng-select-focused {
+  background-color: rgb(246 246 246) !important;
+  outline: 1px solid var(--clr-primary-100, #e7e7e7) !important;
+}
+
+.ng-select .ng-select-container {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+.ng-select .ng-select-container .ng-value {
+  color: #262626 !important;
+  font-size: 1rem !important;
+}
+
+.ng-select .ng-select-container .ng-placeholder {
+  color: #888 !important;
+  font-size: 1rem !important;
+}
+
+.ng-select .ng-arrow-wrapper {
+  color: #888 !important;
+}
+
+/* Style du menu déroulant de ng-select */
+.ng-dropdown-panel {
+  background: #fff !important;
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+  margin-top: 0 !important;
+  width: 100% !important;
+  min-width: unset !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  padding: 0 !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 0.512rem 0.75rem !important;
+  font-size: 1rem !important;
+  color: #262626 !important;
+  cursor: pointer !important;
+  background: transparent;
+  transition: background 0.2s !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+  padding: 0.512rem 0.75rem !important;
+  font-size: 1rem !important;
+  color: #262626 !important;
+  cursor: pointer !important;
+  background: transparent !important;
+  transition: background 0.2s !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+  background: #d3d3d3 !important;
+  color: #777 !important;
+  cursor: not-allowed !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-selected {
+  background: #ececec !important;
+  color: #000000 !important;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option:hover,
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-marked {
+  background: rgb(246 246 246) !important;
+}
+
+.badge {
+  border-radius: 99px !important;
+  background-color: var(--clr-grey) !important;
+  padding-block: 6px !important;
+  padding-inline: 0.625rem !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #262626 !important;
+
+  &.active {
+    background-color: var(--clr-green-100) !important;
+    color: var(--clr-green-900) !important;
+  }
+
+  &.closed {
+    background-color: var(--clr-blue-100) !important;
+    color: var(--clr-blue-500) !important;
+  }
+
+  &.Clôturer {
+    background-color: #f1f9fe !important;
+    color: #239ad4 !important;
+  }
+
+  &.exploitant {
+    background-color: var(--clr-violet-500) !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+  }
+
+  &.certificateur {
+    background-color: var(--clr-blue-600) !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+  }
+
+  &.directeur {
+    background-color: var(--clr-dark-900) !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+  }
+
+  &.super-admin {
+    background-color: var(--clr-green-950) !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+  }
+
+  &.admin {
+    background-color: var(--clr-yellow-900) !important;
+    color: #fff !important;
+    border-radius: 4px !important;
+  }
+}
+
+.back-btn {
+  border-radius: 99px !important;
+  cursor: pointer !important;
+  padding: 0.75rem !important;
+  &:hover {
+    background-color: var(--clr-primary-100) !important;
+  }
+}
+
+.modal-content {
+  border: none !important;
+  // overflow: hidden !important;
+  border-radius: 0.5rem !important;
+}
+
+.ng-select {
+  margin-block: 0 !important;
+}
+
+/* Style "chip" pour les éléments sélectionnés dans ng-select multi */
+.ng-select.ng-select-multiple .ng-value {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgb(38, 38, 38) !important;
+  border-radius: 8px !important;
+  margin: 0 0.25rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #fff !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03) !important;
+  gap: 0.5rem !important;
+  padding-inline: 0.625rem !important;
+}
+
+.ng-select.ng-select-multiple .ng-value .ng-value-label {
+  margin-right: 0.5rem !important;
+}
+
+.ng-select.ng-select-multiple .ng-value .ng-value-icon {
+  color: #888 !important;
+  cursor: pointer !important;
+  font-size: 1.1em !important;
+  margin-left: 0.25rem !important;
+  transition: color 0.2s !important;
+}
+
+.ng-select.ng-select-multiple .ng-value .ng-value-icon:hover {
+  color: #e74c3c !important;
+}
+
+.ng-select.ng-select-multiple .ng-value {
+  margin-bottom: 0.25rem !important;
+}
+
+/* Correctif overflow ng-select multi (global au cas où le scoped ne suffit pas) */
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  white-space: nowrap !important;
+}
+
+.ng-select.ng-select-multiple
+  .ng-select-container
+  .ng-value-container
+  .ng-value {
+  flex: 0 0 auto !important;
+}
+
+.ng-select-multiple .ng-select-container.ng-has-value {
+  height: 100% !important;
+  overflow-y: scroll;
+}
+
+.ng-select-container.ng-has-value {
+  /* Masquer la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Masquer la scrollbar pour Firefox */
+  scrollbar-width: none;
+
+  /* Masquer la scrollbar pour IE et Edge Legacy */
+  -ms-overflow-style: none;
+}
+
+.certified,
+.uncertified {
+  border-radius: 0.25rem;
+  padding-block: 0.625rem;
+  padding-inline: 0.5rem;
+  font-weight: 600;
+}
+
+.certified {
+  background-color: var(--clr-green-100);
+  color: var(--clr-green);
+}
+
+.uncertified {
+  background-color: var(--clr-yellow-100);
+  color: var(--clr-yellow-500);
+}
+
+// Swal custom css
+.swal2-title {
+  font-size: 1.2em !important;
+  font-weight: 600 !important;
+  color: var(--clr-dark) !important;
+  font-family: "Roboto" !important;
+}
+
+.swal2-content {
+  font-size: 1rem !important;
+}
+
+.swal-custom-confirm {
+  background: rgb(254, 121, 0) !important;
+  color: #fff !important;
+  font-family: "Roboto" !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.swal-custom-cancel {
+  background: rgba(0, 0, 0, 1) !important;
+  color: #fff !important;
+  font-family: "Roboto" !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.swal-custom-popup {
+  font-family: "Roboto" !important;
+}

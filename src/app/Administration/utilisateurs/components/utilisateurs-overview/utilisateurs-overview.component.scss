@@ -1,0 +1,153 @@
+// :host {
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   height: 100%;
+//   align-content: start;
+//   gap: 24px 0px;
+//   & .kpi-card-list {
+//     gap: 16px;
+//   }
+// }
+
+// :host .btn-container {
+//   display: flex;
+//   justify-content: flex-end;
+//   align-items: center;
+//   gap: 30px;
+//   margin-block: 32px;
+// }
+
+// ::ng-deep .swal2-input {
+//   margin: 0 35px !important;
+// }
+
+// :host {
+
+//   & .header-group span {
+//     color: #3d3d3d;
+//   }
+
+//   .header-group h2 {
+//     font-size: calc(0.625rem + 1vw);
+//     font-weight: 700;
+//     margin-bottom: 20px !important;
+//   }
+
+//   & .header-group div:first-child {
+//     display: grid;
+//     gap: 12px;
+//   }
+
+//   & .header-group > * {
+//     flex-shrink: 0;
+//   }
+
+// }
+
+:host {
+  display: grid;
+  align-content: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  max-height: 100vh;
+  // overflow-y: scroll;
+  padding-inline: 2px;
+  padding-block-end: 2rem;
+
+  /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la scrollbar pour Firefox */
+  scrollbar-width: none;
+
+  /* Cacher la scrollbar pour IE et Edge Legacy */
+  -ms-overflow-style: none;
+
+  & .header-group {
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
+    margin-block-start: 2rem;
+  }
+
+  & .header-group span {
+    color: #3d3d3d;
+  }
+
+  .header-group h2 {
+    font-size: calc(0.625rem + 1vw);
+    font-weight: 700;
+    padding-bottom: 2rem;
+  }
+
+  & .header-group div:first-child {
+    display: grid;
+    gap: 12px;
+  }
+
+  & .header-group > * {
+    flex-shrink: 0;
+  }
+
+  & .header-group {
+    // display: flex;
+    // flex-direction: row;
+    &.is-narrow {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      & [variante] {
+        width: 100%;
+        max-width: 315px;
+      }
+    }
+  }
+
+  & .filter-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    & > * {
+      flex-shrink: 0;
+    }
+
+    & [type="text"] {
+      max-width: 315px;
+      outline: 1px solid var(--clr-grey);
+      border-radius: 8px;
+    }
+    &__select {
+      display: grid;
+      align-items: center;
+      grid-template-columns: auto 1fr;
+      gap: 0.625rem;
+    }
+
+    &__select select {
+      background: transparent;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      display: block;
+      width: max-content;
+      padding: 0.612rem 1rem;
+    }
+  }
+
+  & pagination {
+    justify-self: center;
+    align-self: end;
+  }
+
+  & #empty {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

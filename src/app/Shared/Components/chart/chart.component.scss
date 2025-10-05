@@ -1,0 +1,57 @@
+.chart-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  .chart-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 300px;
+    border-radius: 8px;
+    background: transparent;
+    padding: 16px;
+    transition: all 0.3s ease;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .chart-container {
+    .chart-wrapper {
+      padding: 12px;
+      min-height: 250px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    .chart-wrapper {
+      padding: 8px;
+      min-height: 200px;
+    }
+  }
+}
+
+// Styles pour les graphiques spécifiques
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+// Animation d'entrée
+.chart-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

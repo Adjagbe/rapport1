@@ -1,0 +1,22 @@
+<div class="campagne-overview-layout" [ngClass]="layoutClass">
+  <campagne-list
+    [style.border-right]="
+      layoutClass !== 'show-campagne-list' ? '2px solid #e0e0e0' : ''
+    "
+    (emitCampagne)="handleSelectedCampagne($event)"
+    [selectedCampagne]="selectedCampagne"
+  />
+  <campagne-details
+    *ngIf="selectedCampagne"
+    [style.border-right]="
+      layoutClass === 'show-app-list' ? '2px solid #e0e0e0' : ''
+    "
+    (emitCampagneApp)="handleSelectedApp($event)"
+    (backToList)="handleBackToList()"
+  />
+  <app-list
+    *ngIf="selectedApp"
+    [selectedApp]="selectedApp"
+    (backToDetails)="handleBackToDetails()"
+  />
+</div>

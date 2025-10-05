@@ -1,0 +1,76 @@
+<div>
+  <div (click)="goBack()">
+    <div class="back-btn">
+      <svg
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.325 13.5L13.925 19.1L12.5 20.5L4.5 12.5L12.5 4.5L13.925 5.9L8.325 11.5H20.5V13.5H8.325Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+    <span class="heading">{{ selectedAppCertification?.applicationName }}</span>
+  </div>
+  <button
+  *HasPermission="'TELECHARGER_UTILISATEUR_CERTIFICATION'"
+    class="generic-btn"
+    variante="primary outline"
+    text="Télécharger le fichier"
+    (click)="downloadCertifiedAccountsExcel()"
+    type="button"
+  >
+    <div class="download-icon"></div>
+  </button>
+</div>
+
+<div class="table-container">
+  <generic-table-v2
+    [actions]="true"
+    [columns]="columns"
+    [datas]="datas"
+    [totalItems]="totalUsers"
+    [actionTemplate]="actionTpl"
+    [maxHeight]="'300px'"
+    (emitFilter)="onFilter($event)"
+  ></generic-table-v2>
+  <pagination
+    [currentPage]="currentPage"
+    [totalItems]="totalUsers"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChange($event)"
+  ></pagination>
+</div>
+
+<ng-template #actionTpl let-row>
+  <div class="actions">
+    <ng-container *HasPermission="'VOIR_DETAIL_UTILISATEUR_CERTIFIE'">
+      <button
+        *ngIf="row.finalCertificationStatus !== ACCOUNTS_STATUS.PENDING"
+        class="generic-btn"
+        variante="tertiary muted"
+        type="button"
+        (click)="details(row.idCampaignApplicationUseraccount)"
+      >
+        <div class="preview-icon"></div>
+        détails
+      </button>
+    </ng-container>
+   <ng-container *HasPermission="'CERTIFIER_UTILISATEUR'">
+     <button
+      *ngIf="row.finalCertificationStatus === ACCOUNTS_STATUS.PENDING"
+      class="generic-btn"
+      variante="primary"
+      type="button"
+      (click)="openCertifiedAccountForm(row)"
+    >
+      <div class="preview-icon"></div>
+      Certifier
+    </button>
+   </ng-container>
+  </div>
+</ng-template>

@@ -1,0 +1,8 @@
+:host {
+  display: block;
+
+  & .wrapper {
+    padding-inline: 1rem;
+    padding-block-end: 1rem;
+  }
+}

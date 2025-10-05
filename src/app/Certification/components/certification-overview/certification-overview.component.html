@@ -1,0 +1,25 @@
+<div class="certification-overview-layout" [ngClass]="layoutClass">
+  <certification-list
+    [certifications]="certifications"
+    [style.border-right]="
+      layoutClass === 'show-certification-details' || 'show-app-list'
+        ? '2px solid #e0e0e0'
+        : ''
+    "
+    (emitCertification)="handleSelectedCertification($event)"
+    [selectedCertification]="selectedCertification"
+  />
+  <certification-details
+    [hideCampagneCards]="hideCampagneCards"
+    [style.border-right]="
+      layoutClass === 'show-app-list' ? '2px solid #e0e0e0' : ''
+    "
+    (emitAppCertification)="handleSelectedAppCertification($event)"
+    (backToList)="handleBackToList()"
+  />
+  <details-list
+    *ngIf="selectedAppCertification"
+    [selectedAppCertification]="selectedAppCertification"
+    (backToDetails)="handleBackToDetails()"
+  />
+</div>

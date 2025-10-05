@@ -1,0 +1,54 @@
+:host {
+  display: grid;
+  align-content: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  max-height: 100vh;
+
+  padding-inline: 2px;
+  padding-block-end: 2rem;
+
+  /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la scrollbar pour Firefox */
+  scrollbar-width: none;
+
+  /* Cacher la scrollbar pour IE et Edge Legacy */
+  -ms-overflow-style: none;
+
+   .header-group h2 {
+    font-size: calc(0.625rem + 1vw);
+    font-weight: 700;
+    padding-bottom: 1rem;
+
+  }
+
+  .header-group-heading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .group-btn{
+    display: flex;
+    align-items: center;
+  }
+
+  .header-group-title{
+
+  }
+
+  a{
+    text-decoration: none;
+
+  }
+  span{
+    color: black;
+    padding-left: 5px;
+  }
+
+
+}

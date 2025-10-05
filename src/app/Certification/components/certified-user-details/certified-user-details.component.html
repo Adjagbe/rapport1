@@ -1,0 +1,218 @@
+<modal-layout heading="Détails de la certification">
+  <div class="container">
+    <div class="accounts-infos">
+      <h3>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 12C10.9 12 9.95833 11.6083 9.175 10.825C8.39167 10.0417 8 9.1 8 8C8 6.9 8.39167 5.95833 9.175 5.175C9.95833 4.39167 10.9 4 12 4C13.1 4 14.0417 4.39167 14.825 5.175C15.6083 5.95833 16 6.9 16 8C16 9.1 15.6083 10.0417 14.825 10.825C14.0417 11.6083 13.1 12 12 12ZM4 20V17.2C4 16.6333 4.14583 16.1125 4.4375 15.6375C4.72917 15.1625 5.11667 14.8 5.6 14.55C6.63333 14.0333 7.68333 13.6458 8.75 13.3875C9.81667 13.1292 10.9 13 12 13C13.1 13 14.1833 13.1292 15.25 13.3875C16.3167 13.6458 17.3667 14.0333 18.4 14.55C18.8833 14.8 19.2708 15.1625 19.5625 15.6375C19.8542 16.1125 20 16.6333 20 17.2V20H4ZM6 18H18V17.2C18 17.0167 17.9542 16.85 17.8625 16.7C17.7708 16.55 17.65 16.4333 17.5 16.35C16.6 15.9 15.6917 15.5625 14.775 15.3375C13.8583 15.1125 12.9333 15 12 15C11.0667 15 10.1417 15.1125 9.225 15.3375C8.30833 15.5625 7.4 15.9 6.5 16.35C6.35 16.4333 6.22917 16.55 6.1375 16.7C6.04583 16.85 6 17.0167 6 17.2V18ZM12 10C12.55 10 13.0208 9.80417 13.4125 9.4125C13.8042 9.02083 14 8.55 14 8C14 7.45 13.8042 6.97917 13.4125 6.5875C13.0208 6.19583 12.55 6 12 6C11.45 6 10.9792 6.19583 10.5875 6.5875C10.1958 6.97917 10 7.45 10 8C10 8.55 10.1958 9.02083 10.5875 9.4125C10.9792 9.80417 11.45 10 12 10Z"
+            fill="black"
+          />
+        </svg>
+        <span class="title">Informations du compte </span>
+      </h3>
+      <div class="left">
+        <div>
+          <span class="label">Nom:</span>
+          <span class="response">{{ fullName }}</span>
+        </div>
+        <div>
+          <span class="label">Email:</span>
+          <span class="response">{{ details?.userAccountEmail ?? "---" }}</span>
+        </div>
+        <div>
+          <span class="label">Application:</span>
+          <span class="response">{{ details?.applicationName ?? "---" }}</span>
+        </div>
+      </div>
+      <div class="right">
+        <div>
+          <span class="label">Direction::</span>
+          <span class="response">{{
+            details?.userAccountDepartmentName ?? "---"
+          }}</span>
+        </div>
+        <div>
+          <span class="label">Profil:</span>
+          <span class="response">{{
+            details?.userAccountProfileNameImported ?? "---"
+          }}</span>
+        </div>
+        <div>
+          <span class="label">Certifié le:</span>
+          <span class="response">{{
+            (details?.certificationDate | date : "dd/MM/yyyy") ?? "---"
+          }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="status-info">
+      <div class="statu">
+        <span class="label">Statut: </span>
+        <span class="value badge success">Certifié</span>
+      </div>
+      <div class="certifier">
+        <span class="label">Certificateur:</span>
+        <span class="value">{{ certifierName }}</span>
+      </div>
+    </div>
+    <div class="commentaire-container">
+      <span class="label">Commentaire</span>
+      <div class="commentaire" *ngIf="details?.certificationComment">
+        <pre class="response" style="white-space: pre-wrap">{{
+          details!.certificationComment
+        }}</pre>
+      </div>
+    </div>
+    <div class="questions-list">
+      <h3>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14 15C14.2833 15 14.5292 14.8958 14.7375 14.6875C14.9458 14.4792 15.05 14.2333 15.05 13.95C15.05 13.6667 14.9458 13.4208 14.7375 13.2125C14.5292 13.0042 14.2833 12.9 14 12.9C13.7167 12.9 13.4708 13.0042 13.2625 13.2125C13.0542 13.4208 12.95 13.6667 12.95 13.95C12.95 14.2333 13.0542 14.4792 13.2625 14.6875C13.4708 14.8958 13.7167 15 14 15ZM13.25 11.8H14.75C14.75 11.3167 14.8 10.9625 14.9 10.7375C15 10.5125 15.2333 10.2167 15.6 9.85C16.1 9.35 16.4333 8.94583 16.6 8.6375C16.7667 8.32917 16.85 7.96667 16.85 7.55C16.85 6.8 16.5875 6.1875 16.0625 5.7125C15.5375 5.2375 14.85 5 14 5C13.3167 5 12.7208 5.19167 12.2125 5.575C11.7042 5.95833 11.35 6.46667 11.15 7.1L12.5 7.65C12.65 7.23333 12.8542 6.92083 13.1125 6.7125C13.3708 6.50417 13.6667 6.4 14 6.4C14.4 6.4 14.725 6.5125 14.975 6.7375C15.225 6.9625 15.35 7.26667 15.35 7.65C15.35 7.88333 15.2833 8.10417 15.15 8.3125C15.0167 8.52083 14.7833 8.78333 14.45 9.1C13.9 9.58333 13.5625 9.9625 13.4375 10.2375C13.3125 10.5125 13.25 11.0333 13.25 11.8ZM8 18C7.45 18 6.97917 17.8042 6.5875 17.4125C6.19583 17.0208 6 16.55 6 16V4C6 3.45 6.19583 2.97917 6.5875 2.5875C6.97917 2.19583 7.45 2 8 2H20C20.55 2 21.0208 2.19583 21.4125 2.5875C21.8042 2.97917 22 3.45 22 4V16C22 16.55 21.8042 17.0208 21.4125 17.4125C21.0208 17.8042 20.55 18 20 18H8ZM8 16H20V4H8V16ZM4 22C3.45 22 2.97917 21.8042 2.5875 21.4125C2.19583 21.0208 2 20.55 2 20V6H4V20H18V22H4Z"
+            fill="#1F1F1F"
+          />
+        </svg>
+        <span class="title">Réponses du questionnaire</span>
+      </h3>
+      <div class="questions-list-content">
+        <div
+          class="questions-grid"
+          *ngIf="
+            details?.questionResponses && details!.questionResponses.length
+          "
+        >
+          <!-- En-tête du tableau -->
+          <div class="grid-header">
+            <div class="header-cell question-header">Question</div>
+            <div class="header-cell response-header">Réponse</div>
+            <div class="header-cell timestamp-header">Date de réponse</div>
+          </div>
+
+          <!-- Lignes des réponses -->
+          <div
+            class="grid-row"
+            *ngFor="
+              let response of details!.questionResponses;
+              trackBy: trackByQuestionId
+            "
+          >
+            <div class="grid-cell question-cell">
+              <span
+                class="question-text pointer tooltip-trigger"
+                (mouseenter)="showTooltip($event, response.questionText)"
+                (mouseleave)="hideTooltip()"
+                >{{ response.questionText | truncate : 45 }}</span
+              >
+            </div>
+
+            <div class="grid-cell response-cell">
+              <!-- Type BOOLEAN -->
+              <div
+                class="boolean-response"
+                *ngIf="response.questionType === 'BOOLEAN'"
+              >
+                <span
+                  class="response-icon"
+                  [class.positive]="response.chosenOptionText === 'OUI'"
+                  [class.negative]="response.chosenOptionText === 'NON'"
+                >
+                  <div
+                    *ngIf="response.chosenOptionText === 'OUI'"
+                    class="valid-icon"
+                  ></div>
+                  <div
+                    *ngIf="response.chosenOptionText === 'NON'"
+                    class="close-icon"
+                  ></div>
+                </span>
+                <span
+                  [class.positive]="response.chosenOptionText === 'OUI'"
+                  [class.negative]="response.chosenOptionText === 'NON'"
+                  class="response-text"
+                  >{{ response.chosenOptionText }}</span
+                >
+              </div>
+
+              <!-- Type LISTE -->
+              <div
+                class="list-response"
+                *ngIf="response.questionType === 'LISTE'"
+              >
+                <span
+                  class="response-text"
+                  [title]="response.relatedDepartmentName"
+                  >{{
+                    response.relatedDepartmentName || "---" | truncate : 40
+                  }}</span
+                >
+              </div>
+
+              <!-- Type TEXT_INPUT -->
+              <div
+                class="text-response"
+                *ngIf="response.questionType === 'TEXT_INPUT'"
+              >
+                <span
+                  class="response-text tooltip-trigger"
+                  (mouseenter)="
+                    showTooltip($event, response.textResponse || '---')
+                  "
+                  (mouseleave)="hideTooltip()"
+                  >{{ response.textResponse || "---" | truncate : 30 }}</span
+                >
+              </div>
+            </div>
+
+            <div class="grid-cell timestamp-cell">
+              <span class="timestamp-text">{{
+                response.responseDate | date : "dd/MM/yyyy HH:mm:ss"
+              }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Message si aucune réponse -->
+        <div
+          class="no-responses"
+          *ngIf="
+            !details?.questionResponses || !details!.questionResponses.length
+          "
+        >
+          <p>Aucune réponse au questionnaire disponible.</p>
+        </div>
+      </div>
+    </div>
+    <div class="action">
+      <button
+        (click)="close()"
+        class="generic-btn"
+        variante="tertiary muted"
+        text="Fermer"
+        type="button"
+      ></button>
+    </div>
+
+    <!-- Tooltip -->
+    <div
+      class="tooltip"
+      [class.show]="isTooltipVisible"
+      [style.left.px]="tooltipPosition.x"
+      [style.top.px]="tooltipPosition.y"
+    >
+      <div class="tooltip-content">
+        {{ tooltipText }}
+      </div>
+    </div>
+  </div>
+</modal-layout>

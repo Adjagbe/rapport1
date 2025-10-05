@@ -1,0 +1,39 @@
+.textarea-div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  
+
+  .custom-textarea {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+
+    border-radius: 5px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    padding: 6px;
+    outline: none;
+    position: relative;
+  }
+
+  .custom-textarea:hover{
+    background-color: #f7f7f7;
+  }
+
+  .icon-container {
+    position: absolute !important;
+    top: 40%;
+
+    &.left {
+        left: 10px;
+      }
+      &.right {
+        right: 10px;
+      }
+  }
+
+}

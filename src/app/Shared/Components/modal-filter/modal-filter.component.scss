@@ -1,0 +1,44 @@
+.header-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 0;
+}
+.hearder-btn{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.filter-container  select {
+      background: transparent;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      display: block;
+      height: 56px;
+      width: max-content;
+      padding: 0.612rem 1rem;
+    }
+.modal-filter{
+  padding: 0 20px 20px 20px;
+}
+
+.filter-container div div {
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  padding-left: 5px;
+
+}
+
+.filter-container div div:hover{
+  background-color: #F6F6F6;
+}
+

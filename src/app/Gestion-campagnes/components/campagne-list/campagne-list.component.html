@@ -1,0 +1,79 @@
+<div
+  class="header-group"
+  #headerGroup
+  *ngIf="campagnesListe && campagnesListe.length"
+>
+  <div class="header-group__heading">
+    <h2>Gestion des campagnes</h2>
+    <span>Créez et gérez vos campagnes de certification</span>
+  </div>
+  <button
+    *HasPermission="'NOUVELLE_CAMPAGNE'"
+    class="generic-btn"
+    [variante]="(queryCampagne$ | async) !== null ? 'secondary' : 'primary'"
+    [style.width]="(queryCampagne$ | async) !== null ? '100%' : 'auto'"
+    text="Nouvelle campagne"
+    type="button"
+    (click)="gotCreateCampagneForm()"
+  >
+    <div class="plus-component"></div>
+  </button>
+</div>
+<!-- FILTRER PAR CAMPAGNE ACTIVE ET INACTIVE -->
+<!-- <button-group /> -->
+<div class="filter-section" *ngIf="campagnesListe && campagnesListe.length">
+  <input
+    type="text"
+    placeholder="Rechercher..."
+    [class.full-width]="(queryCampagne$ | async) !== null"
+    [class.fixed-width]="(queryCampagne$ | async) === null"
+    [formControl]="searchControl"
+  />
+  <div class="filter-section__select">
+    <span>Filtre :</span>
+    <custom-select
+      [options]="CAMPAGNE_STATUS_FILTERS"
+      [formControl]="searchByStatusControl"
+      placeholder="Tous les statuts"
+    >
+    </custom-select>
+  </div>
+</div>
+
+<ng-container
+  *ngIf="campagnesListe && campagnesListe.length; else emptyCampagne"
+>
+  <campagne-card
+    *ngFor="let campagne of campagnesListe"
+    [class.active]="
+      selectedCampagne === campagne || campagne.idCampaign === idCampagne
+    "
+    [campagne]="campagne"
+    (emitCampagne)="onEmitCampagne(campagne)"
+  />
+</ng-container>
+<pagination
+  *ngIf="campagnesListe && campagnesListe.length"
+  [currentPage]="currentPage"
+  [totalItems]="totalCampagnes"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+></pagination>
+
+<ng-template #emptyCampagne>
+  <div id="empty">
+    <img
+      width="200"
+      height="200"
+      src="/assets/images/empty-campagne.png"
+      style="object-fit: contain"
+    />
+    <div class="msg">
+      <p style="text-align: center">
+        Aucune campagne n'est disponible pour le moment. Créez-en une pour la
+        voir affichée ici.
+      </p>
+      <span (click)="gotCreateCampagneForm()">Créer une campagne ?</span>
+    </div>
+  </div>
+</ng-template>

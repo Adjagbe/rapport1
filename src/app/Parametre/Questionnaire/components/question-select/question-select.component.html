@@ -1,0 +1,315 @@
+<div class="header">
+  <div>
+    <h2 class="">{{
+        LibelleConfig === "Ajouter"
+        ? "Assigner une question"
+        : "Modification de l'assignation de la  question"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            LibelleConfig==="Ajouter" ? "Assigner une nouvelle question pour ce niveau"
+            : "Modifier la question assignée pour ce niveau "
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div>
+<div>
+  <form>
+
+    <!-- Ajout -->
+    <ng-container *ngIf="LibelleConfig === 'Ajouter'; else update" >
+      <form [formGroup]="newAssignQuestion" (submit)="OnSubmitAjout()">
+        <div class="input-group mb-2">
+
+          <!-- Formulaire pour les questions de type BOOLEAN  -->
+          <ng-container *ngIf="questionType == 'BOOLEAN'">
+            <form-control label="Sélectionner une réponse">
+              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idOption">
+                <ng-option  *ngFor="let item of listReponse" [value]="item.idOptionTemplate">{{ item.optionText }}</ng-option>
+              </ng-select>
+            </form-control>
+
+            <ng-container *ngIf="!newAssignQuestion.get('actionType')?.value">
+              <form-control class="pt-3" label="Sélectionner la question de destination">
+                <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idNextQuestion">
+                  <ng-option  *ngFor="let item of listQuestion" [value]="item.idQuestion">{{ item.questionText }}</ng-option>
+                </ng-select>
+              </form-control>
+            </ng-container>
+
+            <ng-container *ngIf="!newAssignQuestion.get('idNextQuestion')?.value">
+                <form-control class="pt-3" label="Type d'action" >
+                  <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="actionType" >
+                    <ng-option  *ngFor="let item of listStatus" [value]="item.value">{{ item.name }}</ng-option>
+                  </ng-select>
+                </form-control>
+            </ng-container>
+
+            <ng-container *ngIf="newAssignQuestion.controls['actionType'].value">
+
+              <form-control  class="pt-3" label="Texte de prevention">
+                <input type="text" formControlName="warning" id="" />
+              </form-control>
+
+              <div class="mt-3" formGroupName="warningColor">
+                <!-- <label for="bgColor">Background Color</label>
+                <input id="bgColor" formControlName="backgroundColor" type="color" /> -->
+
+                <label for="fontColor">Couleur du texte</label>
+                <input id="fontColor" formControlName="fontColor" type="color" />
+
+                <!-- <label for="borderColor">Border Color</label>
+                <input id="borderColor" formControlName="borderColor" type="color" /> -->
+              </div>
+            </ng-container>
+          </ng-container>
+
+          <!-- Formulaire pour les questions de type TEXT_INPUT -->
+          <ng-container *ngIf="questionType == 'TEXT_INPUT'">
+              <form-control class="pt-3" label="Type d'action" >
+                <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="actionType" >
+                  <ng-option  *ngFor="let item of listStatus" [value]="item.value">{{ item.name }}</ng-option>
+                </ng-select>
+              </form-control>
+              <ng-container *ngIf="newAssignQuestion.controls['actionType'].value">
+
+                <form-control  class="pt-3" label="Texte de prevention">
+                  <input type="text" formControlName="warning" id="" />
+                </form-control>
+
+                <div class="mt-3" formGroupName="warningColor">
+                  <!-- <label for="bgColor">Background Color</label>
+                  <input id="bgColor" formControlName="backgroundColor" type="color" /> -->
+
+                  <label for="fontColor">Couleur du texte</label>
+                  <input id="fontColor" formControlName="fontColor" type="color" />
+
+                  <!-- <label for="borderColor">Border Color</label>
+                  <input id="borderColor" formControlName="borderColor" type="color" /> -->
+                </div>
+              </ng-container>
+          </ng-container>
+
+          <!-- Formulaire pour les questions de type LISTE -->
+          <ng-container *ngIf="questionType == 'LISTE'" >
+              <form-control label="Sélectionner une réponse">
+                <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idOption">
+                  <ng-option  *ngFor="let item of listReponse" [value]="item.idOptionTemplate">{{ item.optionText }}</ng-option>
+                </ng-select>
+              </form-control>
+
+              <ng-container>
+                <form-control class="pt-3" label="Type d'action" >
+                  <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="actionType" >
+                    <ng-option  *ngFor="let item of listStatus" [value]="item.value">{{ item.name }}</ng-option>
+                  </ng-select>
+                </form-control>
+              </ng-container>
+
+              <ng-container *ngIf="newAssignQuestion.controls['actionType'].value">
+
+                <form-control  class="pt-3" label="Texte de prevention">
+                  <input type="text" formControlName="warning" id="" />
+                </form-control>
+
+                <div class="mt-3" formGroupName="warningColor">
+
+                  <label for="fontColor">Couleur du texte</label>
+                  <input id="fontColor" formControlName="fontColor" type="color" />
+                </div>
+              </ng-container>
+
+          </ng-container>
+
+        </div>
+        <div class="footer-btn">
+          <button class="generic-btn close-btn" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+          <button class="generic-btn valid-btn " variante="primary" text="Terminer"
+           [disabled]="isDisable()" type="submit" ></button>
+        </div>
+      </form>
+    </ng-container>
+
+    <!-- Update -->
+    <ng-template #update>
+        <div class="container">
+          <form [formGroup]="techForm" >
+
+           <div class="input-group mb-4">
+              <form-control  label="Question définir">
+                <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idCurrentQuestion">
+                  <ng-option  *ngFor="let item of listQuestion" [value]="item.idQuestion">{{ item.questionText }}</ng-option>
+                </ng-select>
+              </form-control>
+           </div>
+
+           
+            <div class="card p-3 container-reponse">
+                <div class="d-flex justify-content-between align-items-center gap-2">
+                  <h5>Liste des reponses</h5>
+                  <button
+                    type="button"
+                    class="generic-btn "
+                    variante="secondary"
+                    
+                    (click)="addTechnology()"
+                  >
+                  <span class="plus-component"></span>
+                  Assigner une réponse
+                  </button>
+                </div>
+
+                    <!-- container configue reponse -->
+                  <div formArrayName="options">
+
+                   <ng-container *ngFor="let option of optionsFormArray.controls;  let i = index" [formGroupName]="i" >
+
+                      <div *ngIf="option.value.idOption != null " class="card mt-3 w-100 p-3 rounded" >
+                        <div  class=" d-flex justify-content-between align-items-center ">
+                          <div class="w-75">
+                            <span>{{ option.value.optionText }}</span><br>
+                            <span >{{ getQuestionText(option.value.idNextQuestion) }}</span>
+
+                          </div>
+
+                          <div class="d-flex gap-2">
+
+                            <!-- edit -->
+                            <button [hidden]="!collapsedStates[i]" type="button" (click)="toggleCollapse(i)"
+                              [attr.aria-expanded]="!isCollapsed"
+                              aria-controls="collapseExample" 
+                              class="btn btn-sm btn-outline-secondary action-btn">
+                              <span class="edit-icon"></span>
+                            </button>
+
+                            <!-- delete -->
+                            <button (click)="deleteOptionQuestion(option.value)" [hidden]="!collapsedStates[i]" class="btn action-btn btn-sm">
+                              <span class="trash-icon"></span>
+                            </button>
+
+                            <!-- fermer -->
+                            <button [hidden]="collapsedStates[i]" 
+                              (click)="toggleCollapse(i)"
+                              [attr.aria-expanded]="!isCollapsed"
+                              aria-controls="collapseExample" 
+                              class="btn action-btn btn-sm ">
+                              <span class="close-icon"></span>
+                            </button>
+                          </div>
+
+                        </div>
+
+                        <div class="reponse-collapse card p-3 mt-3" #collapse="ngbCollapse" [ngbCollapse]="collapsedStates[i]">
+                          <div class=" input-group mt-2" >
+                            <h5>Modifier la réponse definir</h5>
+
+                            <form-control label="Sélectionner une réponse" >
+                              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idOption">
+                                <ng-option  *ngFor="let item of listReponse" [value]="item.idOptionTemplate">{{ item.optionText }}</ng-option>
+                              </ng-select>
+                            </form-control>
+
+                            <label class="pt-3">Sélectionner la question de destination</label>
+                            <form-control >
+                              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idNextQuestion">
+                                <ng-option  *ngFor="let item of listQuestion" [value]="item.idQuestion">{{ item.questionText }}</ng-option>
+                              </ng-select>
+                            </form-control>
+
+                            <label class="pt-3">Type d'action</label>
+                            <form-control >
+                              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="actionType" >
+                                <ng-option  *ngFor="let item of listStatus" [value]="item.value">{{ item.name }}</ng-option>
+                              </ng-select>
+                            </form-control>
+
+                            <ng-container *ngIf="option.get('actionType')?.value">
+
+                              <label class="pt-3">Texte de prevention</label>
+                              <form-control>
+                                <input type="text" formControlName="warning" id="" />
+                              </form-control>
+
+                              <div class="mt-3" formGroupName="warningColor">
+                                <label for="fontColor">Couleur du texte</label>
+                                <input id="fontColor" formControlName="fontColor" type="color" />
+                              </div>
+
+                            </ng-container>
+                           
+                          </div>
+                        </div>
+
+                      </div>
+                   </ng-container>
+                  </div>
+
+                  <!-- Assigner une nouvelle reponse -->
+                <div class="input-group mb-2"  formArrayName="technologies">
+                  <div  class="input-group mb-2 card  p-3 mt-4" *ngFor="let tech of technologies.controls; let i = index"
+                    [formGroupName]="i">
+
+                        <div class=" d-flex justify-content-between align-items-center ">
+                          <h5>Assigner une nouvelle reponse</h5>
+                                <!-- fermer -->
+                                <button 
+                                (click)="removeTechnology(i)"
+                                  class="btn action-btn btn-sm ">
+                                  <span class="close-icon"></span>
+                                </button>
+                        </div>
+                          <form-control label="Sélectionner une réponse">
+                            <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idOption">
+                              <ng-option  *ngFor="let item of listReponse" [value]="item.idOptionTemplate">{{ item.optionText }}</ng-option>
+                            </ng-select>
+                          </form-control>
+
+                          <ng-container *ngIf="!isActionTypeAssigned(i)">
+                            <form-control class="pt-3" label="Sélectionner la question de destination">
+                              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idNextQuestion">
+                                <ng-option  *ngFor="let item of listQuestion" [value]="item.idQuestion">{{ item.questionText }}</ng-option>
+                              </ng-select>
+                            </form-control>
+                          </ng-container>
+
+                         <ng-container *ngIf="!isIdNextQuestionAssigned(i)">
+                            <form-control class="pt-3" label="Type d'action" >
+                              <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="actionType" >
+                                <ng-option  *ngFor="let item of listStatus" [value]="item.value">{{ item.name }}</ng-option>
+                              </ng-select>
+                            </form-control>
+                         </ng-container>
+
+                          <ng-container *ngIf="isActionTypeAssigned(i)">
+                            <form-control class="pt-3" label="Texte de prevention">
+                              <input type="text" formControlName="warning" id="" />
+                            </form-control>
+
+                            <div class="mt-3 w-50" formGroupName="warningColor">
+                              <label for="fontColor">Couleur du texte</label>
+                              <input id="fontColor" formControlName="fontColor" type="color" />
+                            </div>
+                          </ng-container>
+
+                       <div class="footer-btn">
+                              <button class="generic-btn close-btn btn-sm" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+                              <button class="generic-btn valid-btn btn-sm"  variante="secondary" text="Ajouter" (click)="OnSubmitAssign(i)" [disabled]="isDisableAssign(i)" type="submit" ></button>
+                        </div>
+                    
+                  </div>
+                </div>
+            </div>
+
+            <div class="footer-btn">
+              <button class="generic-btn close-btn" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+              <button class="generic-btn valid-btn " variante="primary" text="Terminer" (click)="onSubmitUpdate()" [disabled]="techForm.invalid || techForm.pristine" type="submit" ></button>
+            </div>
+
+          </form>
+        </div>
+    </ng-template>
+      
+  </form>
+</div>

@@ -1,0 +1,353 @@
+<div class="table-heading" *ngIf="nameListe !== '' && btnTextCreate !== ''">
+  <div class="text-container my-3">
+    <span>Liste des {{ nameListe }}: </span>
+    <small
+      >({{ totalItems !== undefined ? totalItems : datas?.length ?? 0 }}
+      {{ nameListe }})</small
+    >
+  </div>
+
+  <div class="filter-container">
+    <div class="filter-section">
+      <div>
+        <div class="search-icon"></div>
+        <input
+          type="text"
+          placeholder="Recherche"
+          [(ngModel)]="filter"
+          (input)="Search($event)"
+          name="filter"
+        />
+      </div>
+      <div class="filter-section__select">
+        <button class="filter-btn" type="button" (click)="FilterUserClick()">
+          <span>Filtrer</span>
+          <span class="down-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="d-flex gap-4">
+      <ng-container *HasPermission="'EXTRACTION_COMPTE_UTILISATEUR'">
+        <button
+          *ngIf="isExport"
+          (click)="ExportUserClick()"
+          class="generic-btn"
+          [variante]="'secondary'"
+        >
+          <span class="download-icon"></span>
+          Exporter
+        </button>
+      </ng-container>
+
+      <button
+        
+        class="generic-btn"
+        [variante]="'primary'"
+        [text]="btnTextCreate"
+        type="button"
+        (click)="onCreateUserClick()"
+      >
+        <div class="plus-component"></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- <div class="filter-container">
+    <div class="d-flex gap-4">
+      <select [formControl]="filterSelectController">
+      <option *ngFor="let col of columns" [value]="col.key">
+        {{ col.label }}
+      </option>
+
+    </select>
+    <input
+      type="text"
+      [placeholder]="'Rechercher par ' + filterSelectController.value"
+      [formControl]="filterInputController"
+      style="border: 1px solid #eee"
+      *ngIf="filterSelectController.value"
+    />
+     <button
+    class="generic-btn"
+    [variante]="'tertiary'"
+    [text]="'Filtrer'"
+    type="button"
+    (click)="onFilterFormChange()"
+    *ngIf="filterSelectController.value" ></button>
+    </div> -->
+  <!-- <button
+    class="generic-btn"
+    [variante]="'tertiary'"
+    [text]="'Filtrer'"
+    type="button"
+    (click)="onFilterFormChange()" > -->
+  <!-- <button
+    class="generic-btn"
+    [variante]="'primary'"
+    [text]="btnTextCreate"
+    type="button"
+    (click)="onCreateUserClick()"
+  >
+    <div class="plus-component"></div>
+  </button>
+  </div> -->
+</div>
+
+<div class="">
+  <div class="table-container">
+    <table
+      class="custom-table"
+      *ngIf="datas && datas?.length; else emptyUserList"
+    >
+      <thead>
+        <tr>
+          <th *ngFor="let col of columns">
+            <div style="display: flex; align-items: center; gap: 0.675rem">
+              <span>{{ col.label }}</span>
+              <div>
+                <svg
+                  *ngIf="col.sortable"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 9.75V4.36875L4.06875 6.3L3 5.25L6.75 1.5L10.5 5.25L9.43125 6.3L7.5 4.36875V9.75H6ZM11.25 16.5L7.5 12.75L8.56875 11.7L10.5 13.6313V8.25H12V13.6313L13.9313 11.7L15 12.75L11.25 16.5Z"
+                    fill="black"
+                  />
+                </svg>
+              </div>
+            </div>
+            <!-- <<<<<<< HEAD
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of datas">
+          <td *ngFor="let col of columns">
+            <span *ngIf="col.key !== 'finalCertificationStatus' && col.key !== 'action'">
+              {{ row?.[col.key] ?? "---" }}
+            </span>
+            <span *ngIf="col.key === 'finalCertificationStatus'">
+              <span
+                [ngClass]="{
+                    'certified': row?.[col.key] === 'certifiés',
+                    'uncertified': row?.[col.key] === 'non certifiés',
+                  }"
+              >
+                {{ row?.[col.key] ?? "---" }}
+              </span>
+            </span>
+            <span class="d-flex gap-2" *ngIf="col.key === 'action'">
+              <span class="icon"><div class="edit-icon"></div></span>
+              <span class="icon"><div class="trash-icon"></div></span>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    ======= -->
+          </th>
+          <th style="width: 150px; padding-right: 60px;" *ngIf="isAction === true">
+            <span> Actions </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of datas">
+          <td *ngFor="let col of columns" class="elements">
+            <span
+              *ngIf="
+                col.key !== 'finalCertificationStatus' &&
+                col.key !== 'action' &&
+                col.key !== 'isLock' &&
+                col.key !== 'statut' &&
+                col.key !== 'fonctionnalites' &&
+                col.key !== 'email' &&
+                col.key !== 'fonction' &&
+                col.key !== 'telephone' &&
+                col.key !== 'isActive' &&
+                col.key !== 'description'
+              "
+            >
+              {{ row?.[col.key] ?? "---" }}
+            </span>
+
+            <span *ngIf="col.key === 'finalCertificationStatus'">
+              <span
+                [ngClass]="{
+                    'certified': row?.[col.key] === 'certifiés',
+                    'uncertified': row?.[col.key] === 'non certifiés',
+                  }"
+              >
+                {{ row?.[col.key] ?? "---" }}
+              </span>
+            </span>
+
+            <span
+              class="pointer tooltip-trigger"
+              *ngIf="['email', 'fonction', 'telephone', 'description'].includes(col.key)"
+              (mouseenter)="showTooltip($event, row[col.key])"
+              (mouseleave)="hideTooltip()"
+            >
+              {{ row?.[col.key] | truncate : 10 }}
+            </span>
+
+            <!-- Tooltip affiché -->
+            <!-- Tooltip -->
+            <div
+              class="tooltip"
+              [class.show]="isTooltipVisible"
+              [style.left.px]="tooltipPosition.x"
+              [style.top.px]="tooltipPosition.y"
+            >
+              <div class="tooltip-content">
+                {{ tooltipText }}
+              </div>
+            </div>
+
+            <!-- <span *ngIf="col.key === 'status'">
+
+            </span> -->
+            <div *ngIf="col.key === 'fonctionnalites'">
+              <ng-template #popTemplate let-message="item" class="popoveR">
+                <div *ngFor="let value of row?.[col.key]" class="d-flex">
+                  {{ value.libelle }}
+                </div>
+              </ng-template>
+              <button
+                type="button"
+                class="btn"
+                style="
+                  border-radius: 8px;
+                  color: #000;
+                  width: auto;
+                  display: flex;
+                  gap: 8px;
+                  background: var(--colors-noir-4, #0000000a);
+                "
+                [popover]="popTemplate"
+                placement="right"
+                popoverTitle="Liste des actions"
+                [popoverContext]="row?.[col.key]"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 7C14.7167 7 14.4792 6.90417 14.2875 6.7125C14.0958 6.52083 14 6.28333 14 6C14 5.71667 14.0958 5.47917 14.2875 5.2875C14.4792 5.09583 14.7167 5 15 5H21C21.2833 5 21.5208 5.09583 21.7125 5.2875C21.9042 5.47917 22 5.71667 22 6C22 6.28333 21.9042 6.52083 21.7125 6.7125C21.5208 6.90417 21.2833 7 21 7H15ZM15 11C14.7167 11 14.4792 10.9042 14.2875 10.7125C14.0958 10.5208 14 10.2833 14 10C14 9.71667 14.0958 9.47917 14.2875 9.2875C14.4792 9.09583 14.7167 9 15 9H21C21.2833 9 21.5208 9.09583 21.7125 9.2875C21.9042 9.47917 22 9.71667 22 10C22 10.2833 21.9042 10.5208 21.7125 10.7125C21.5208 10.9042 21.2833 11 21 11H15ZM15 15C14.7167 15 14.4792 14.9042 14.2875 14.7125C14.0958 14.5208 14 14.2833 14 14C14 13.7167 14.0958 13.4792 14.2875 13.2875C14.4792 13.0958 14.7167 13 15 13H21C21.2833 13 21.5208 13.0958 21.7125 13.2875C21.9042 13.4792 22 13.7167 22 14C22 14.2833 21.9042 14.5208 21.7125 14.7125C21.5208 14.9042 21.2833 15 21 15H15ZM8 14C7.16667 14 6.45833 13.7083 5.875 13.125C5.29167 12.5417 5 11.8333 5 11C5 10.1667 5.29167 9.45833 5.875 8.875C6.45833 8.29167 7.16667 8 8 8C8.83333 8 9.54167 8.29167 10.125 8.875C10.7083 9.45833 11 10.1667 11 11C11 11.8333 10.7083 12.5417 10.125 13.125C9.54167 13.7083 8.83333 14 8 14ZM2 19V18.1C2 17.75 2.08333 17.4167 2.25 17.1C2.41667 16.7833 2.65 16.5333 2.95 16.35C3.7 15.9 4.49583 15.5625 5.3375 15.3375C6.17917 15.1125 7.06667 15 8 15C8.93333 15 9.82083 15.1125 10.6625 15.3375C11.5042 15.5625 12.3 15.9 13.05 16.35C13.35 16.5333 13.5833 16.7833 13.75 17.1C13.9167 17.4167 14 17.75 14 18.1V19C14 19.2833 13.9042 19.5208 13.7125 19.7125C13.5208 19.9042 13.2833 20 13 20H3C2.71667 20 2.47917 19.9042 2.2875 19.7125C2.09583 19.5208 2 19.2833 2 19ZM4.15 18H11.85C11.2667 17.6667 10.65 17.4167 10 17.25C9.35 17.0833 8.68333 17 8 17C7.31667 17 6.65 17.0833 6 17.25C5.35 17.4167 4.73333 17.6667 4.15 18ZM8 12C8.28333 12 8.52083 11.9042 8.7125 11.7125C8.90417 11.5208 9 11.2833 9 11C9 10.7167 8.90417 10.4792 8.7125 10.2875C8.52083 10.0958 8.28333 10 8 10C7.71667 10 7.47917 10.0958 7.2875 10.2875C7.09583 10.4792 7 10.7167 7 11C7 11.2833 7.09583 11.5208 7.2875 11.7125C7.47917 11.9042 7.71667 12 8 12Z"
+                    fill="#262626"
+                  />
+                </svg>
+                {{ row?.[col.key] ? row?.[col.key]?.length : "0" }}
+              </button>
+            </div>
+            <div
+              *ngIf="col.key === 'isLock' || col.key === 'statut'"
+              [ngClass]="statusClr[getStatusLabel(row?.[col.key])]"
+            >
+              {{ getStatusLabel(row?.[col.key]) }}
+            </div>
+            <div
+              *ngIf="col.key === 'isActive'"
+              [ngClass]="statusClr[getStatusLabelIsActive(row?.[col.key])]"
+            >
+              {{ getStatusLabelIsActive(row?.[col.key]) }}
+            </div>
+          </td>
+
+          <td style="width: 150px;">
+            <span class="d-flex gap-2" *ngIf="isAction === true">
+              <ng-container  >
+                <span class="icon" *ngIf="isViewUpdate" (click)="editItem(row)"
+                ><div class="edit-icon2"></div
+                ></span>
+              </ng-container>
+             <ng-container >
+               <span
+                  class="icon-trash"
+                  *ngIf="isViewDelete"
+                  (click)="deleteItem(row)"
+                  ><div class="trash-icon"></div
+                ></span>
+             </ng-container>
+              <ng-container *HasPermission="'ACTIVER_DESACTIVER_UTILISATEUR'">
+                <span
+                  class="d-flex align-items-center"
+                  *ngIf="getStatusLabel(row?.['statut']) == 'Actif' || getStatusLabel(row?.['isLock']) == 'Actif' || getStatusLabelIsActive(row?.['isActive']) == 'Actif'"
+                  (click)="lockItem(row)"
+                  ><div class="lock-icon"></div
+                ></span>
+                <span
+                  class="d-flex align-items-center"
+                  *ngIf="getStatusLabel(row?.['statut']) == 'Inactif' || getStatusLabel(row?.['isLock']) == 'Inactif' || getStatusLabelIsActive(row?.['isActive']) == 'Inactif'"
+                  (click)="unlockItem(row)"
+                  ><div class="unlock-icon"></div
+                ></span>
+              </ng-container>
+            </span>
+          </td>
+
+          <td *ngIf="actions">
+            <ng-container
+              *ngIf="actionTemplate"
+              [ngTemplateOutlet]="actionTemplate"
+              [ngTemplateOutletContext]="{ $implicit: row }"
+            ></ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #emptyUserList>
+    <div *ngIf="!datas || !datas?.length">
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let col of columns">
+              <div style="display: flex; align-items: center; gap: 0.675rem">
+                <span>{{ col.label }}</span>
+                <div>
+                  <svg
+                    *ngIf="col.sortable"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 18 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M6 9.75V4.36875L4.06875 6.3L3 5.25L6.75 1.5L10.5 5.25L9.43125 6.3L7.5 4.36875V9.75H6ZM11.25 16.5L7.5 12.75L8.56875 11.7L10.5 13.6313V8.25H12V13.6313L13.9313 11.7L15 12.75L11.25 16.5Z"
+                      fill="black"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </th>
+            <th *ngIf="isAction === true">
+              <span> Actions </span>
+            </th>
+          </tr>
+        </thead>
+      </table>
+      <div class="liste-vide">
+        <img
+          width="200"
+          height="200"
+          src="/assets/images/empty_folder.png"
+          alt=""
+        />
+        <span>Liste vide ...</span>
+      </div>
+    </div>
+  </ng-template>
+</div>

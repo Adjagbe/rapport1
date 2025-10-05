@@ -1,0 +1,64 @@
+<div class="header-group" #headerGroup>
+
+  <div class="header-group-heading mt-4">
+    <div class="header-group-title">
+      <h2>Interface des paramétrages</h2>
+      <p>
+        Gérez les paramètres : ajouter, modifier et/ou supprimer les
+        questionnaires
+      </p>
+    </div>
+   
+  </div>
+  <div>
+    <nav-parametrage />
+  </div>
+  
+    <div class="d-flex align-items-center mt-4 pb-2">
+      <a routerLink="/parametrage/questionnaires" class="text-secondary">Paramétrage / </a>
+      <span> Gestion des questions</span>
+    </div>
+    <!-- <div class="header-group-heading">
+
+      <div class="header-group-title">
+        <h2>Gestion des questions</h2>
+        <p>
+          Gérez les paramètres : ajouter, modifier et/ou supprimer les
+          questions
+        </p>
+      </div>
+
+    </div> -->
+
+  <div>
+
+
+    <app-generic-table-v4
+      [datas]="listQuestion"
+      [totalItems]="count" 
+      [nameListe]="'questions'"
+      [btnTextCreate]="'Ajouter une question'"
+      [isViewDelete]="true" 
+      [isAction]="true" 
+      [isViewUpdate]="true"
+      [columns]="columnsQuestion"
+      [totalItems]="count" 
+      (onSearch)="onSearch($event)"
+      (pageChange)="onPageChange($event)" 
+      (onFilterUser)="onFilterQuestions()"
+      (onCreateUser)="onCreateQuestions()"
+      (editClick)="onEditClick($event)" 
+      (deleteClick)="onDeleteClick($event)"
+      (emitChangeFilter)="onFilterChanged($event)"
+    />
+    <pagination
+      [currentPage]="currentPage"
+      [totalItems]="count"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    ></pagination> 
+  </div>
+  
+
+
+</div>

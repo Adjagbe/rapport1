@@ -1,0 +1,48 @@
+<form [formGroup]="loginForm" (submit)="onLogin()">
+  <error-message [errorMessage]="errorMessage" *ngIf="showErrorMessage  " />
+  <h2>Connexion</h2>
+  <div class="ldap-container">
+    <span>Accès windows</span>
+    <switch-control   (valueChanged)="isLdap = $event" />
+  </div>
+  <form-control label="login">
+    <input #loginInput type="text" id="login" placeholder="Entrer votre identifiant" formControlName="login" class="input" />
+  </form-control>
+  <form-control label="mot de passe" icon="show-icon">
+    <ng-container>
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        id="Mot de passe"
+        placeholder="Entrer le mot de passe"
+        formControlName="password"
+        class="input"
+      />
+    </ng-container>
+    <ng-container icon-slot>
+      <div
+        *ngIf="!showPassword"
+        (click)="togglePassword()"
+        style="cursor: pointer"
+        class="show-icon"
+      ></div>
+      <div
+        *ngIf="showPassword"
+        (click)="togglePassword()"
+        style="cursor: pointer"
+        class="hidde-icon"
+      ></div>
+    </ng-container>
+  </form-control>
+  <span *ngIf="!isLdap" class="forget-paswrd">
+    <a *ngIf="!isLdap" [routerLink]="['/authentication', 'forgot-password']"
+      >Mot de passe oublié</a
+    >
+  </span>
+  <button
+    class="generic-btn"
+    variante="primary"
+    text="Se connecter"
+    type="submit"
+    [disabled]="isSubmit || loginForm.invalid"
+  ></button>
+</form>

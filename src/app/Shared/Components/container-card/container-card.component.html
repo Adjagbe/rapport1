@@ -1,0 +1,23 @@
+<div class="heading">
+  <div>
+    <div class="heading__title">
+      <ng-content *ngIf="iconSlot" select="[icon]" />
+      <h3>{{ title }}</h3>
+    </div>
+    <div class="heading__description">
+      <span> {{ description }}</span>
+    </div>
+  </div>
+  <div class="heading__filter" *ngIf="filter && filter.length">
+    <custom-select
+      [options]="filter"
+      [formControl]="filterControl"
+      placeholder="Sélectionner..."
+    >
+    </custom-select>
+  </div>
+</div>
+
+<ng-content />
+
+<ng-content select="[footer]" />

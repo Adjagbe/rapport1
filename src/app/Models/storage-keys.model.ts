@@ -1,0 +1,3 @@
+export const enum STORAGE_KEYS {
+  USER_INFO = 'd90ee031915342881c566f58c9f872db28723e9d0d35c6cf1c87161ff4ccf1e2d3b4c5a67890abcdef1234567890abcd',
+}

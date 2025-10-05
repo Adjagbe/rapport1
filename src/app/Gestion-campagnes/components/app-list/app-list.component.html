@@ -1,0 +1,122 @@
+<div>
+  <div (click)="backToCampagneDetails()">
+    <div class="back-btn">
+      <svg
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.325 13.5L13.925 19.1L12.5 20.5L4.5 12.5L12.5 4.5L13.925 5.9L8.325 11.5H20.5V13.5H8.325Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+    <span class="heading">{{ selectedApp?.applicationName }}</span>
+  </div>
+  <button
+    *HasPermission="'TELECHARGER_UTILISATEUR_CAMPAGNE'"
+    class="generic-btn"
+    variante="primary outline"
+    text="Télécharger le fichier"
+    (click)="downloadCertifiedAccountsExcel()"
+    type="button"
+  >
+    <div class="download-icon"></div>
+  </button>
+</div>
+
+<div class="table-container">
+  <generic-table-v2
+    [columns]="columns"
+    [datas]="datas"
+    [totalItems]="totalUsers"
+    (emitFilter)="onFilter($event)"
+    [actions]="hasCertifiedAccounts"
+    [actionTemplate]="actionTpl"
+  />
+</div>
+<pagination
+  [currentPage]="currentPage"
+  [totalItems]="totalUsers"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+></pagination>
+
+<ng-container *HasPermission="'TELECHARGER_LISTE_UTILISATEUR_IMPORTE_CAMPAGNE'">
+  <div
+    *ngIf="uploadedFiles && uploadedFiles?.length && totalUsers"
+    class="upload-file-container"
+  >
+    <h3>
+      Liste des utilisateurs importés pour {{ selectedApp?.applicationName }}
+    </h3>
+    <div *ngFor="let file of uploadedFiles" class="upload-file">
+      <div class="upload-file__infos">
+        <ng-container *ngTemplateOutlet="uploadFileIcon"></ng-container>
+        <div class="upload-file__infos-text">
+          <span class="upload-file__name">{{ file?.fileName ?? "---" }}</span>
+          <span class="upload-file__sd">
+            {{ datas?.length ?? "--" }}
+            {{ (datas?.length ?? 0) > 1 ? "comptes" : "compte" }} • {{
+              file.importDate | date : "dd/MM/yyyy 'à' HH:mm"
+            }}
+          </span>
+        </div>
+      </div>
+      <div class="pointer btn-download" (click)="downloadFile(file)">
+        <span>Télécharger le fichier</span>
+        <ng-container *ngTemplateOutlet="uploadFileIcon"></ng-container>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+
+<ng-template #uploadFileIcon>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M8 18H16V16H8V18ZM8 14H16V12H8V14ZM6 22C5.45 22 4.97917 21.8042 4.5875 21.4125C4.19583 21.0208 4 20.55 4 20V4C4 3.45 4.19583 2.97917 4.5875 2.5875C4.97917 2.19583 5.45 2 6 2H14L20 8V20C20 20.55 19.8042 21.0208 19.4125 21.4125C19.0208 21.8042 18.55 22 18 22H6ZM13 9V4H6V20H18V9H13Z"
+      fill="black"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #uploadFileIcon>
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 16L7 11L8.4 9.55L11 12.15V4H13V12.15L15.6 9.55L17 11L12 16ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z"
+      fill="black"
+    />
+  </svg>
+</ng-template>
+
+<ng-template #actionTpl let-row>
+  <div class="actions">
+    <button
+      *ngIf="row.finalCertificationStatus !== ACCOUNTS_STATUS.PENDING"
+      class="generic-btn"
+      variante="tertiary muted"
+      type="button"
+      (click)="details(row.idCampaignApplicationUseraccount)"
+    >
+      <div class="preview-icon"></div>
+      détails
+    </button>
+  </div>
+</ng-template>

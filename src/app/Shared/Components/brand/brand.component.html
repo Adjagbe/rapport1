@@ -1,0 +1,56 @@
+<svg
+  width="36"
+  height="36"
+  viewBox="0 0 59 57"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    x="0.791291"
+    y="0.791291"
+    width="56.973"
+    height="55.3904"
+    stroke="#FE7900"
+    stroke-width="1.58258"
+  />
+  <rect width="58.5556" height="56.973" fill="#F36F0F" />
+  <rect x="8.02563" y="40.1338" width="42.802" height="7.85834" fill="white" />
+</svg>
+<h2>
+  <span>Certification de compte</span>
+  <div
+    class="toggle-main-nav pointer"
+    (click)="toggleMainNav()"
+    title="Toggle la barre de navigation"
+  >
+    <ng-container *ngTemplateOutlet="toggleNavIcon" />
+  </div>
+</h2>
+
+<ng-template #toggleNavIcon>
+  <svg
+    width="32"
+    height="32"
+    viewBox="0 0 24 25"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <mask
+      id="mask0_2513_9724"
+      style="mask-type: alpha"
+      maskUnits="userSpaceOnUse"
+      x="0"
+      y="0"
+      width="24"
+      height="25"
+    >
+      <rect y="0.513672" width="24" height="24" fill="#D9D9D9" />
+    </mask>
+    <g mask="url(#mask0_2513_9724)">
+      <path
+        d="M5 21.5137C4.45 21.5137 3.97917 21.3178 3.5875 20.9262C3.19583 20.5345 3 20.0637 3 19.5137V5.51367C3 4.96367 3.19583 4.49284 3.5875 4.10117C3.97917 3.70951 4.45 3.51367 5 3.51367H19C19.55 3.51367 20.0208 3.70951 20.4125 4.10117C20.8042 4.49284 21 4.96367 21 5.51367V19.5137C21 20.0637 20.8042 20.5345 20.4125 20.9262C20.0208 21.3178 19.55 21.5137 19 21.5137H5ZM8 19.5137V5.51367H5V19.5137H8ZM10 19.5137H19V5.51367H10V19.5137Z"
+        fill="currentColor"
+      />
+    </g>
+  </svg>
+</ng-template>

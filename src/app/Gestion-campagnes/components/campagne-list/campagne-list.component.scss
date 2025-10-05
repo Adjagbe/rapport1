@@ -1,0 +1,129 @@
+:host {
+  display: grid;
+  align-content: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  max-height: 100vh;
+  overflow-y: scroll;
+  padding-inline: 0.25rem;
+  padding-block-end: 2rem;
+
+  &.padding-inline-end {
+    padding-inline-end: 1.25rem;
+  }
+
+  /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la scrollbar pour Firefox */
+  scrollbar-width: none;
+
+  /* Cacher la scrollbar pour IE et Edge Legacy */
+  -ms-overflow-style: none;
+
+  & .header-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-block-start: 2rem;
+  }
+
+  & .header-group span {
+    color: #3d3d3d;
+  }
+
+  .header-group h2 {
+    font-size: calc(0.525rem + 1vw);
+    font-weight: 700;
+  }
+
+  & .header-group div:first-child {
+    display: grid;
+    gap: 12px;
+  }
+
+  & .header-group > * {
+    flex-shrink: 0;
+  }
+
+  & .header-group {
+    display: flex;
+    flex-direction: row;
+    &.is-narrow {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      & [variante] {
+        width: 100%;
+        max-width: 315px;
+      }
+    }
+  }
+
+  & .filter-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    & > * {
+      flex-shrink: 0;
+    }
+
+    & [type="text"] {
+      outline: 2px solid rgb(215, 215, 215);
+      border-radius: 8px;
+
+      &.fixed-width {
+        max-width: 315px;
+      }
+      &.full-width {
+        max-width: 100%;
+      }
+    }
+    &__select {
+      display: grid;
+      align-items: center;
+      grid-template-columns: auto 1fr;
+      gap: 0.625rem;
+    }
+
+    &__select select {
+      background: transparent;
+      border: 2px solid rgb(215, 215, 215);
+      border-radius: 8px;
+      display: block;
+      width: max-content;
+      padding: 0.612rem 1rem;
+    }
+  }
+
+  & pagination {
+    justify-self: center;
+    align-self: end;
+  }
+
+  & #empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+
+    & .msg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 388px;
+    }
+
+    & .msg span {
+      color: var(--clr-primary);
+      cursor: pointer;
+    }
+  }
+}

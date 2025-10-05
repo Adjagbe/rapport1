@@ -1,0 +1,58 @@
+<!-- <div class="header">
+  <div>
+    <h2 class="">{{
+        questionOrReponse === "Question"
+        ? "Configurez question"
+        : "Configurez réponse"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            questionOrReponse==="Question" ? "Configurez une nouvelle question"
+            : "Configurez une nouvelle réponse"
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div> -->
+
+
+<div class="">
+    <!-- Ajouter une nouvelle option de reponse -->
+   <!-- <ng-container *ngIf="questionOrReponse==='Response'">
+      <form [formGroup]="newOptionReponseFormulaire" (submit)="createNewReponse()">
+        <div>
+            <form-control label="Définissez la réponse">
+              <input type="text" formControlName="Veuillez saisir votre réponse" id="" />
+            </form-control>
+        </div>
+        <div class="footer-btn">
+          <button class="generic-btn close-btn" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+          <button class="generic-btn valid-btn " variante="primary" text="Terminer"  type="submit" ></button>
+        </div>
+      </form>
+   </ng-container> -->
+
+   <!-- Ajouter une nouvelle question -->
+    <!-- <ng-container *ngIf="questionOrReponse==='Question'" >
+      <form [formGroup]="newQuestionFormulaire" (submit)="createNewQuestion()">
+      <div>
+          <form-control label="Définissez la nouvelle question">
+            <input type="text" formControlName="questionText" id="" />
+          </form-control>
+
+          <form-control label="Choisissez le type de la question" class="pt-3">
+            <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="questionType">
+              <ng-option  *ngFor="let item of listeQuestionType" [value]="item.value">{{ item.name }}</ng-option>
+            </ng-select>
+          </form-control>
+      </div>
+      <div class="footer-btn">
+        <button class="generic-btn close-btn" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+        <button class="generic-btn valid-btn " variante="primary" text="Terminer" type="submit" [disabled]="isSubmit" ></button>
+      </div>
+    </form>
+    </ng-container> -->
+
+
+</div>

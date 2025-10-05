@@ -1,0 +1,64 @@
+
+<div class="header">
+  <div>
+    <h2 class="">{{
+        btnSubmitText === "Ajouter une plateforme"
+        ? "Ajouter une plateforme"
+        : "Modification de la plateforme"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            btnSubmitText==="Ajouter une plateforme" ? "Veuillez remplir ces champs ci-dessous afin d’ajouter une nouvelle plateforme."
+            : "Veuillez remplir ses champs ci-dessous afin de modifier la plateforme."
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div>
+
+<form class="form-main" [formGroup]="newApplicationFormulaire" (submit)="CreateOrUpdateApplication()">
+    <div class="container-form ">
+
+      <!-- <div class="d-flex justify-content-between align-items-center statutBox ">
+        <label class=" ">Activer ou désactiver le statut de cette direction</label>
+        <label class="switch">
+          <input type="checkbox" name="ldap"  formControlName="isActive">
+          <span class="slider"></span>
+        </label>
+      </div> -->
+
+      <div class="formStatus my-4">
+          <label>Statut </label>
+          <button class="btnStatus" type="button">
+            <span (click)="changeStatusAction('true')" style="padding: 10px 17px"
+              [ngClass]="{'btn-black-status' : newApplicationFormulaire.get('isActive')!.value == true}">Activer</span>
+            <span (click)="changeStatusAction('false')" style="padding: 10px 17px"
+              [ngClass]="{'btn-black-status' : newApplicationFormulaire.get('isActive')!.value == false}">Désactiver</span>
+          </button>
+      </div>
+
+      <div lass="form-groupe">
+        <form-control label="Nom de la plateforme">
+          <input type="text" formControlName="name" id="" />
+        </form-control>
+
+        <textarea-control label="Description de la plateforme">
+          <textarea  class="textarea-div p-2"
+              formControlName="description"
+              [rows]="7">
+          </textarea>
+        </textarea-control>
+
+        
+
+      </div>
+
+    </div>
+
+    <div class="footer-btn">
+        <button class="generic-btn close-btn" variante="tertiary" text="Annuler" type="button" (click)="close()"></button>
+        <button class="generic-btn valid-btn" variante="primary" text="Terminer" type="submit" [disabled]="newApplicationFormulaire.invalid || newApplicationFormulaire.pristine || isSubmit" ></button>
+    </div>
+
+</form>

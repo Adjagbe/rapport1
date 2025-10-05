@@ -1,0 +1,47 @@
+<form [formGroup]="confirmOtpForm" (submit)="onResetPassword()">
+  <error-message [errorMessage]="errorMessage" *ngIf="showErrorMessage" />
+  <h2>Vérification</h2>
+  <p class="text-center">Nous avons envoyé un code à votre numéro de téléphone. Veuillez le saisir ci dessous</p>
+  <span class="text-center" *ngIf="otpExpirationSeconds > 0"> Le code de vérification a été envoye au :  <b>{{userNumber}}</b></span>
+    <span class="text-center pb-3" *ngIf="otpExpirationSeconds <= 0" style="color: red;">Cliquez sur le bouton pour renvoyer un autre code</span>
+  <!-- <form-control label="">
+    <input type="text" id="otp" formControlName="otp" />
+  </form-control> -->
+  <div class="otp-container mb-2">
+    <input #otp1Input type="text" maxlength="1"  formControlName="otp1" (input)="moveToNext($event, 'otp2')" (keydown.backspace)="moveToPrev($event, null)"  autofocus />
+    <input type="text" maxlength="1" formControlName="otp2" (input)="moveToNext($event, 'otp3')" (keydown.backspace)="moveToPrev($event, 'otp1')" />
+    <input type="text" maxlength="1" formControlName="otp3" (input)="moveToNext($event, 'otp4')" (keydown.backspace)="moveToPrev($event, 'otp2')" />
+    <input type="text" maxlength="1" formControlName="otp4" (input)="submitAuto()" (keydown.backspace)="moveToPrev($event, 'otp3')" />
+  </div>
+  <div class="otp-timer" *ngIf="otpExpirationSeconds > 0">
+    <p class="text-center pt-3 code-expire">Vous pouvez renvoyer le code dans : <strong>{{ displayTime }} </strong></p>
+  </div>
+  <!-- <button
+    class="generic-btn"
+    variante="primary"
+    text="Suivant"
+    type="submit"
+    [disabled]="isSubmit || confirmOtpForm.invalid"
+    (click)="onSubmit()"
+  ></button> -->
+  <button
+    class="generic-btn"
+    variante="secondary"
+    text="Renvoyer le code"
+    type="button"
+    (click)="onResendOtp()"
+    *ngIf="otpExpirationSeconds <= 0"
+  ></button>
+  <button
+    class="generic-btn"
+    variante="tertiary"
+    text="Retour"
+    type="button"
+    (click)="onForgotPassword()"
+  ></button>
+  <button
+    class="back"
+    type="button"
+    (click)="onPageConnexion()"
+  >Retour à la page de connexion</button>
+</form>

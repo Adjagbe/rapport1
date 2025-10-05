@@ -1,0 +1,47 @@
+<div class="campagne-details">
+  <div>
+    <span
+      >Créé par:
+      {{ campagne?.userLastName + " " + campagne?.userFirstName }}</span
+    >
+  </div>
+  <div class="campagne-details__heading">
+    <span>{{ campagne?.name }}</span>
+    <span
+      [class.desactive]="campagne?.status === CAMPAGNES_STATUS_ENUM.DESACTIVE"
+      [class.en-cours]="campagne?.status === CAMPAGNES_STATUS_ENUM.EN_COURS"
+      [class.planifier]="campagne?.status === CAMPAGNES_STATUS_ENUM.PLANIFIE"
+      [class.cloture]="campagne?.status === CAMPAGNES_STATUS_ENUM.CLOTURE"
+      [class.termine]="campagne?.status === CAMPAGNES_STATUS_ENUM.TERMINATE"
+      >{{ getStatusLabel(campagne?.status) }}
+    </span>
+  </div>
+  <div class="campagne-details__applist">
+    <span
+      >Période:
+      {{
+        campagne?.startDate
+          ? (campagne?.startDate | date : "dd/MM/yyyy")
+          : "--/--/---"
+      }}
+      -
+      {{
+        campagne?.estimatedEndDate
+          ? (campagne?.estimatedEndDate | date : "dd/MM/yyyy")
+          : "--/--/---"
+      }}
+    </span>
+  </div>
+  <div class="campagne-details__periode"></div>
+</div>
+<!-- <div #campagneAction class="campagne-action">
+  <button
+    class="generic-btn"
+    variante="tertiary muted"
+    type="button"
+    (click)="onEmitCampagne($event)"
+  >
+    <div class="preview-icon"></div>
+    Voir les détails
+  </button>
+</div> -->

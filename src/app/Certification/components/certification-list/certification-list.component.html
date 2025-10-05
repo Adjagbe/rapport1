@@ -1,0 +1,76 @@
+<div
+  class="header-group"
+  #headerGroup
+  *ngIf="certificationsListe && certificationsListe.length"
+>
+  <div class="header-group__heading">
+    <h2>Interface de certifications</h2>
+    <span>Certifiez les comptes de votre direction</span>
+  </div>
+  <!-- Pas de bouton de création pour l'instant -->
+</div>
+<!-- FILTRE PAR STATUT -->
+<div
+  class="filter-section"
+  *ngIf="certificationsListe && certificationsListe.length"
+>
+  <input
+    type="text"
+    placeholder="Rechercher..."
+    [formControl]="searchControl"
+  />
+  <!-- <div class="filter-section__select">
+    <span>Filtre :</span>
+    <select [formControl]="searchByStatusControl">
+      <option *ngFor="let f of CERTIFICATION_STATUS_FILTERS" [value]="f.value">
+        {{ f.label }}
+      </option>
+    </select>
+  </div> -->
+</div>
+
+<ng-container
+  *ngIf="
+    certificationsListe && certificationsListe.length;
+    else emptyCertification
+  "
+>
+  <ng-container *ngFor="let certification of certificationsListe">
+    <certification-card
+      *ngIf="
+        !['CLOTURE', 'DESACTIVE', 'TERMINATE'].includes(
+          certification?.status ?? ''
+        )
+      "
+      [class.active]="
+        selectedCertification === certification ||
+        currentCampagne === certification.idCampaign
+      "
+      [campagne]="certification"
+      (emitCampagne)="onEmitCertification(certification)"
+    />
+  </ng-container>
+</ng-container>
+<pagination
+  *ngIf="certificationsListe && certificationsListe.length"
+  [currentPage]="currentPage"
+  [totalItems]="totalCertifications"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+></pagination>
+
+<ng-template #emptyCertification>
+  <div id="empty">
+    <img
+      width="200"
+      height="200"
+      src="/assets/images/empty-campagne.png"
+      style="object-fit: contain"
+    />
+    <div class="msg">
+      <p style="text-align: center">
+        Aucune campagne n'est disponible pour le moment.
+      </p>
+    </div>
+  </div>
+</ng-template>

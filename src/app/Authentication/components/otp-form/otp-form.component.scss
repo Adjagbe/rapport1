@@ -1,0 +1,68 @@
+:host {
+  display: block;
+  width: min(600px, 100%);
+
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 7px 27px 5px rgba(0, 0, 0, 0.05);
+  padding: 50px;
+
+  h2 {
+    text-align: center;
+  }
+
+  & a {
+    text-align: end;
+    color: var(--clr-primary);
+    text-decoration: dashed;
+  }
+
+  & .ldap-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem;
+    background-color: var(--clr-grey);
+    border-radius: 4px;
+
+    span {
+      padding-block-end: 4px;
+    }
+  }
+
+  & form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 0;
+  }
+
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.otp-container input {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+.code-expire{
+  color: #808080;
+}
+
+.back{
+  color:#ff9133;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+}
+
+.back:hover{
+  color:#000000;
+}
+
+}

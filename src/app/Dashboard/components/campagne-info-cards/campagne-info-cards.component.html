@@ -1,0 +1,7 @@
+<div class="head">
+  <div class="icon-container">
+    <ng-content></ng-content>
+  </div>
+  <div class="label">{{ label }}</div>
+</div>
+<div class="value">{{ value ? value : 0 }} {{ unit ?? "" }}</div>

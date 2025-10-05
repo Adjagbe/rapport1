@@ -1,0 +1,140 @@
+:host {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 64px;
+
+  &.sm {
+    padding: 0.25rem;
+  }
+
+  &.outline-none {
+    outline: none !important;
+  }
+
+  position: relative;
+
+  .btn-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 30, 30, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    z-index: 2;
+    pointer-events: none; // pour ne pas bloquer les events natifs
+  }
+  .lock-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: #888;
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.5));
+  }
+
+  &[disabled] {
+    cursor: not-allowed !important;
+    pointer-events: none;
+    background-color: #e0e0e0 !important;
+    color: #aaa !important;
+    box-shadow: none !important;
+    opacity: 1;
+  }
+  &:disabled:hover,
+  &[disabled]:hover {
+    background-color: #e0e0e0 !important;
+    color: #aaa !important;
+  }
+
+  &.primary {
+    background-color: var(--clr-primary);
+    color: #fff;
+
+    &.sm {
+      padding: 0.25rem;
+    }
+
+    &:hover {
+      background-color: #ff9133;
+    }
+  }
+
+  &.primary.outline {
+    background-color: transparent;
+    outline: 2px solid var(--clr-primary);
+    color: var(--clr-primary);
+
+    &:hover {
+      background-color: var(--clr-primary);
+      color: #fff;
+    }
+  }
+
+  &.secondary {
+    background-color: var(--clr-dark);
+    color: #fff;
+
+    &:hover {
+      background-color: rgba(60, 60, 60, 1);
+    }
+  }
+
+  &.secondary.outline {
+    color: var(--clr-dark);
+    background-color: transparent;
+    outline: 2px solid var(--clr-dark);
+
+    &:hover {
+      background-color: var(--clr-dark);
+      color: #fff;
+    }
+  }
+
+  &.primary,
+  &.secondary,
+  &.tertiary {
+    &.muted {
+      outline: 2px solid var(--clr-grey) !important;
+    }
+  }
+
+  &.tertiary {
+    outline: 2px solid var(--clr-dark);
+    color: var(--clr-dark);
+    background: transparent;
+
+    &.sm {
+      padding: 0.25rem;
+    }
+
+    &.danger {
+      outline: 2px solid var(--clr-red);
+      color: var(--clr-red);
+
+      &:hover {
+        background-color: var(--clr-red);
+        color: #fff;
+      }
+    }
+    &:hover {
+      background-color: var(--clr-dark);
+      color: #fff;
+    }
+
+    &.outline.success {
+      background-color: transparent;
+      outline: 2px solid var(--clr-green-900);
+      color: var(--clr-green);
+
+      &:hover {
+        background-color: var(--clr-green);
+        color: #fff;
+      }
+    }
+  }
+}

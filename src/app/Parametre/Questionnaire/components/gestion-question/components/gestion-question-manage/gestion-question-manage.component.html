@@ -1,0 +1,38 @@
+
+<div class="header">
+  <div>
+    <h2 class="">{{
+        btnSubmitText === "Ajouter une question"
+        ? "Ajouter une question"
+        : "Modification de la question"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            btnSubmitText==="Ajouter une question" ? "Configurez une question."
+            : "Renseigner les informations pour modifier la question"
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div>
+
+<form class="form-main" [formGroup]="newQuestionFormulaire" (submit)="CreateOrUpdateQuestion()">
+    <div class="container-form ">
+        <form-control label="Définissez la nouvelle question">
+            <input type="text" formControlName="questionText" id="" />
+        </form-control>
+
+        <form-control label="Choisissez le type de la question" class="pt-3">
+            <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="questionType">
+              <ng-option  *ngFor="let item of listeQuestionType" [value]="item.value">{{ item.name }}</ng-option>
+            </ng-select>
+        </form-control>
+    </div>
+
+    <div class="footer-btn">
+        <button class="generic-btn close-btn" variante="tertiary" text="Annuler" type="button" (click)="close()"></button>
+        <button class="generic-btn valid-btn" variante="primary" text="Terminer" type="submit" [disabled]="newQuestionFormulaire.invalid || newQuestionFormulaire.pristine" ></button>
+    </div>
+
+</form>

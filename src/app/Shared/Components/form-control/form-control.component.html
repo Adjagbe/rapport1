@@ -1,0 +1,21 @@
+<label [for]="label">
+  <div>
+    <span>{{
+      label ? label[0].toUpperCase() + label.slice(1).toLowerCase() : label
+    }}</span>
+    <span *ngIf="isRequired && label"> *</span>
+  </div>
+  <small *ngIf="subLabel">{{ subLabel }}</small>
+</label>
+
+<div class="input-div">
+  <ng-content />
+  <div class="{{ 'icon-container ' + from }}">
+    <ng-content select="[icon-slot]" />
+  </div>
+</div>
+
+<!-- doit revoir la facon d'afficher les msg d'erreurs -->
+<!-- <small *ngIf="isRequiredField" class="text-danger"
+  >Champs {{ label }} obligatoire</small
+> -->

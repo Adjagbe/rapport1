@@ -1,0 +1,92 @@
+<modal-layout
+  heading="Importer des utilisateurs"
+  subHeading="Sélectionnez l'application et chargez vos fichiers CSV ou Excel"
+>
+  <form [formGroup]="form" (submit)="onSubmit()">
+    <error-message
+      [errorMessage]="ErrorMsg"
+      *ngIf="showErrorMsg && form.invalid"
+    />
+    <form-control label="Application cible">
+      <ng-container *ngIf="selectedAppId && applications">
+        <input
+          type="text"
+          class="form-control"
+          [value]="selectedAppLabel"
+          disabled
+        />
+      </ng-container>
+      <ng-container *ngIf="!selectedAppId">
+        <ng-select
+          [items]="applications"
+          bindLabel="label"
+          bindValue="value"
+          formControlName="application"
+        ></ng-select>
+      </ng-container>
+    </form-control>
+    <!-- DRAG an DROP ZONE -->
+    <div>
+      <span>Fichier à importer</span>
+      <div
+        class="file-drop-zone"
+        [class.drag-over]="isDragOver"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        *ngIf="!selectedFile"
+      >
+        <div class="text-container">
+          <div class="cloud-icon"></div>
+          <span>Glisser-déposer des fichiers pour les joindre ou</span>
+        </div>
+        <button
+          (click)="onFileUpload()"
+          class="generic-btn"
+          variante="tertiary"
+          text="Parcourir"
+          type="button"
+        ></button>
+      </div>
+      <div class="preview-zone" *ngIf="selectedFile">
+        <upload-preview-card (_)="heandleRemove()">
+          <span class="heading">{{ selectedFile!.name }}</span>
+          <span>{{
+            selectedFile!.lastModified | date : "dd MMM yyyy, HH:mm"
+          }}</span>
+          <span>{{ selectedFile!.size / 1024 | number : "1.0-2" }} Ko</span>
+        </upload-preview-card>
+      </div>
+    </div>
+    <div class="advice-zone">
+      <h3>Format attendu</h3>
+      <span
+        >Colonnes requises: 'Login', 'Nom', 'Prenom', 'Mail', 'CUID',
+        'Profil','Statut', 'Direction'</span
+      >
+    </div>
+    <!-- BTN-ZONE -->
+    <div class="campagne_btn-container">
+      <button
+        (click)="cancel()"
+        class="generic-btn"
+        variante="tertiary muted"
+        text="Annuler"
+        type="button"
+      ></button>
+      <button
+        class="generic-btn"
+        variante="primary"
+        text="Terminer"
+        type="submit"
+      ></button>
+    </div>
+  </form>
+  <input
+    type="file"
+    #fileInput
+    formControlName="file"
+    (change)="onFileChanged()"
+    style="display: none"
+  />
+</modal-layout>

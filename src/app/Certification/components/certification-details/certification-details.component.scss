@@ -1,0 +1,110 @@
+:host {
+  // display: grid;
+  height: 100%;
+  gap: 0.5rem 0px;
+  align-content: start;
+  max-height: 100vh;
+  overflow-y: scroll;
+  padding-inline: 3px;
+
+  /* Cacher la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cacher la scrollbar pour Firefox */
+  scrollbar-width: none;
+
+  /* Cacher la scrollbar pour IE et Edge Legacy */
+  -ms-overflow-style: none;
+
+  & .campagne-container {
+    margin-block-start: 1.688rem;
+    outline: 1px solid var(--clr-grey);
+    border-radius: 8px;
+    padding: 0.875rem;
+    display: grid;
+    gap: 0.5rem 0px;
+  }
+
+  & > div:not(.campagne-container) {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-block-start: 1rem;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  & .heading-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & .heading-wrapper .heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  & > div:nth-child(1) [variante] {
+    width: 100%;
+    max-width: 315px;
+  }
+
+  & > div span:nth-child(1) {
+    font-weight: 700;
+  }
+
+  & .listed-app {
+    padding: 5px;
+    max-height: 60dvh;
+    overflow-y: scroll;
+    /* Masquer la scrollbar pour Webkit (Chrome, Safari, Edge Chromium) */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Masquer la scrollbar pour Firefox */
+    scrollbar-width: none;
+
+    /* Masquer la scrollbar pour IE et Edge Legacy */
+    -ms-overflow-style: none;
+  }
+
+  & .listed-app.expanded {
+    max-height: 87dvh;
+  }
+
+  & #empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    & .msg {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 388px;
+    }
+
+    & .msg span {
+      color: var(--clr-primary);
+      cursor: pointer;
+    }
+  }
+
+  & .campagne-cards {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-block-end: 1.5rem;
+  }
+}
+
+:host-context(.show-app-list) .campagne-cards {
+  display: none;
+}

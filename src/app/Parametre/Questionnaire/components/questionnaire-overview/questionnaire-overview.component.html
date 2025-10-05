@@ -1,0 +1,61 @@
+<div class="header-group" #headerGroup>
+  <div class="header-group-heading">
+    <div class="header-group-title">
+      <h2>Interface des paramétrages</h2>
+      <p>
+        Gérez les paramètres : ajouter, modifier et/ou supprimer les
+        questionnaires
+      </p>
+    </div>
+    <div class="group-btn">
+      <!-- <button
+        class="generic-btn me-4"
+        [variante]="'primary outline'"
+        (click)="AddQuestion()"
+      >
+        <span class="help-icon"></span>
+        <span>Ajouter une question</span>
+      </button> -->
+
+      <button
+        class="generic-btn me-4"
+        [variante]="'primary outline'"
+        (click)="GestionQuestion()"
+      >
+        <span class="help-icon"></span>
+        <span>Gestion des questions</span>
+      </button>
+
+      <!-- <button
+        class="generic-btn"
+        [variante]="'primary outline'"
+        (click)="AddReponse()"
+      >
+        <span class="awnser-icon"></span>
+        <span>Ajouter une reponse</span>
+      </button> -->
+
+       <button
+        class="generic-btn"
+        [variante]="'primary outline'"
+        (click)="GestionReponse()"
+      >
+        <span class="awnser-icon"></span>
+        <span>Gestion des reponses</span>
+      </button>
+    </div>
+  </div>
+  <div>
+    <nav-parametrage />
+  </div>
+  <div class="organization-card">
+    <div class="organization-wrapper">
+      <app-organization 
+        [node]="listQuestionnaire"
+        (reloadDataQ)="onReloadDataQ()">
+      </app-organization>
+    </div>
+  </div>
+
+
+</div>

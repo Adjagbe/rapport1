@@ -1,0 +1,32 @@
+<div class="header">
+  <div>
+    <h2 class="">{{
+        btnSubmitText === "Ajouter une reponse"
+        ? "Ajouter une reponse"
+        : "Modification de la reponse"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            btnSubmitText==="Ajouter une reponse" ? "Configurez une reponse."
+            : "Renseigner les informations pour modifier la reponse"
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div>
+
+<form class="form-main" [formGroup]="newOptionReponseFormulaire" (submit)="CreateOrUpdateReponse()">
+    <div class="container-form ">
+       <form-control label="Définissez la réponse">
+              <input type="text" formControlName="optionText" id="" />
+        </form-control>
+
+    </div>
+
+    <div class="footer-btn">
+        <button class="generic-btn close-btn" variante="tertiary" text="Annuler" type="button" (click)="close()"></button>
+        <button class="generic-btn valid-btn" variante="primary" text="Terminer" type="submit" [disabled]="newOptionReponseFormulaire.get('optionText')?.invalid || newOptionReponseFormulaire.pristine"></button>
+    </div>
+
+</form>

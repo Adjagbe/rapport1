@@ -1,0 +1,34 @@
+:host {
+  display: grid;
+  gap: 1rem;
+  // width: 100%;
+  align-content: start;
+  margin-block-start: 1rem;
+
+  & div:first-child {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  & .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.675rem;
+  }
+
+  & span.heading {
+    font-weight: 700;
+  }
+
+  & .actions {
+    display: flex;
+    gap: 0.675rem;
+    align-items: center;
+  }
+  & .table-container {
+    display: grid;
+    gap: 2rem;
+  }
+}

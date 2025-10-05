@@ -1,0 +1,34 @@
+<div class="header">
+  <div>
+    <h2 class="">{{
+        LibelleConfig === "Ajouter"
+        ? "Assigner une question"
+        : "Modification de l'assignation de la  question"
+        }}
+    </h2>
+    <span class="pt-5">
+        {{
+            LibelleConfig==="Ajouter" ? "Assigner une nouvelle question pour ce niveau"
+            : "Modifier la question assignée pour ce niveau "
+        }}
+    </span>
+  </div>
+  <div class="close-icon" (click)="close()"></div>
+</div>
+
+<form class="input-group" [formGroup]="newAssignQuestion" (submit)="OnSubmitAjout()">
+    <ng-container >
+        <form-control  label="Sélectionner la question " class="pt-3">
+            <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idCurrentQuestion">
+                <ng-option  *ngFor="let item of listQuestion" [value]="item.idQuestion">{{ item.questionText }}</ng-option>
+            </ng-select>
+        </form-control>
+    </ng-container>
+
+    <div class="w-100">
+        <div class="footer-btn 4">
+        <button class="generic-btn close-btn" variante="tertiary" text="Annuler" (click)="close()" type="button"></button>
+        <button class="generic-btn valid-btn " variante="primary" text="Terminer" type="submit" [disabled]="newAssignQuestion.get('idCurrentQuestion')?.invalid || isSubmit" ></button>
+    </div>
+    </div>
+</form>

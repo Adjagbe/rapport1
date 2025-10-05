@@ -1,0 +1,39 @@
+<div>
+  <div class="heading-wrapper">
+    <div class="back-btn" (click)="backToCampagneList()">
+      <svg
+        width="25"
+        height="25"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.325 13.5L13.925 19.1L12.5 20.5L4.5 12.5L12.5 4.5L13.925 5.9L8.325 11.5H20.5V13.5H8.325Z"
+          fill="black"
+        />
+      </svg>
+    </div>
+    <div class="heading">
+      <span>{{ campagne?.name ?? "----" }}</span>
+      <span>Détails et gestion de la campagne</span>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="applicationList?.length; else emptyApp">
+  <div *HasPermission="'DETAILS_CAMPAGNE'" class="campagne-container">
+    <app-details
+      *ngFor="let app of applicationList"
+      [appDetail]="app"
+      (click)="onEmitCampagneApp(app)"
+      [class.active]="currentApp === app.applicationId"
+      [hideActions]="hideActions.includes(campagne?.status ?? '')"
+    />
+  </div>
+</ng-container>
+<ng-template #emptyApp>
+  <div id="emptyApp">
+    <img width="200" height="200" src="/assets/images/Scene.gif" />
+    <p style="text-align: center">Pas d'application...</p>
+  </div>
+</ng-template>

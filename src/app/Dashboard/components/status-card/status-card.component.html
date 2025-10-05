@@ -1,0 +1,15 @@
+<div class="{{ 'container__icon ' + iconClass }}">
+  <ng-content></ng-content>
+</div>
+<div class="container__content">
+  <div class="container__infos">
+    <span class="container__primary">
+      {{ label }}
+    </span>
+    <span class="container__secondary"> {{ subLabel }} </span>
+  </div>
+  <div class="container__actions">
+    <span>{{ value ?? "--" }}</span>
+    <ng-content select="[slot='download']" />
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<h2 class="header">
+  {{
+  btnSubmitText === "Enregistrer"
+  ? "Créer un nouveau rôle"
+  : "Modifier un rôle"
+  }}
+  <div class="close-icon" (click)="close()"></div>
+</h2>
+<form [formGroup]="newActionFormulaire" (submit)="CreateOrUpdateAction()">
+  <!-- <div class="form-groupe"> -->
+
+  <div class="form-groupe">
+    <!-- <forme-control [label]="ACTIONS_TEXTS.NEW_OFFER_FORM.CONTROLERS_HEADING.LIBELLE">
+          <input type="text" formControlName="libelle" id=""
+            [placeholder]="ACTIONS_TEXTS.NEW_OFFER_FORM.PLACEHOLDERS.LIBELLE" (change)="setCodeAction()" />
+        </forme-control>
+        <forme-control [label]="ACTIONS_TEXTS.NEW_OFFER_FORM.CONTROLERS_HEADING.CODE" *ngIf="viewCodeAction">
+          <input type="text" formControlName="code" id=""
+            [placeholder]="ACTIONS_TEXTS.NEW_OFFER_FORM.PLACEHOLDERS.CODE" />
+            <button class="btn-refresh" *ngIf="viewBtnRefreshCode" (click)="getActionGenerate()"><div class="reload-icon" [loading]="isActionGenerate"></div></button>
+        </forme-control>
+        <forme-control [label]="ACTIONS_TEXTS.NEW_OFFER_FORM.CONTROLERS_HEADING.ROLE">
+            <ng-select formControlName="parentId">
+              <ng-option *ngFor="let profil of listFonctionnalites" [value]="profil.id">{{
+                profil.libelle
+                }}</ng-option>
+            </ng-select>
+          </forme-control> -->
+
+    <form-control label="Libelle">
+      <input type="text" id="libelle" formControlName="libelle" class="input" (change)="setCodeAction()" />
+    </form-control>
+    <form-control label="Code">
+      <input type="text" id="code" formControlName="code" class="input" />
+      <button class="btn-refresh" *ngIf="viewBtnRefreshCode" (click)="getActionGenerate()">
+        <div class="reload-icon" [loading]="isActionGenerate"></div>
+      </button>
+    </form-control>
+    <form-control label="Parent">
+      <ng-select formControlName="parentId" class="select">
+        <ng-option *ngFor="let profil of listFonctionnalites" [value]="profil.id">{{
+          profil.libelle
+          }}</ng-option>
+      </ng-select>
+    </form-control>
+    <div class="formStatus">
+      <label>Statut </label>
+      <button class="btnStatus" type="button">
+        <span (click)="changeStatusAction('true')" style="padding: 10px 17px"
+          [ngClass]="{'btn-black-status' : newActionFormulaire.get('status')!.value == true}">Activer</span>
+        <span (click)="changeStatusAction('false')" style="padding: 10px 17px"
+          [ngClass]="{'btn-black-status' : newActionFormulaire.get('status')!.value == false}">Désactiver</span>
+      </button>
+      <!-- <label>Statut par defaut</label>
+          <label class="switch">
+            <input type="checkbox" name="status" formControlName="status">
+            <span class="slider"></span>
+        </label> -->
+    </div>
+  </div>
+  <!-- </div> -->
+  <div class="btn-container">
+    <!-- <button cta-button type="btn-secondary" size="md" (click)="close()">
+      <ng-container slot="text-slot">
+        <p class="text-slot"> {{ ACTIONS_TEXTS.NEW_OFFER_FORM.CANCLE_BTN }}</p>
+      </ng-container>
+    </button>
+    <button cta-button type="btn-primary" size="md" [disabled]="newActionFormulaire.invalid || isSubmit" (click)="CreateOrUpdateAction()">
+      <ng-container slot="text-slot">
+        <p class="text-slot">{{ btnSubmitText }}</p>
+        <svg *ngIf="isSubmit" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 100 100" xml:space="preserve">
+          <path fill="#fff"
+            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50"
+              to="360 50 50" repeatCount="indefinite" />
+          </path>
+        </svg>
+      </ng-container>
+    </button> -->
+
+    <button class="generic-btn" variante="tertiary" text="Retour" type="button" (click)="close()"></button>
+    <button class="generic-btn" variante="primary" text="Valider" type="submit"></button>
+  </div>
+</form>

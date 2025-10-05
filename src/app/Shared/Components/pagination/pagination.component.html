@@ -1,0 +1,29 @@
+<nav class="pagination">
+  <span
+    class="page-link"
+    [class.disabled]="currentPage === 1"
+    (click)="goToPage(currentPage - 1)"
+  >
+    Précédent
+  </span>
+
+  <ng-container *ngFor="let item of getVisiblePages()">
+    <span
+      *ngIf="item.type === 'page'"
+      class="page-number"
+      [class.active]="currentPage === item.value"
+      (click)="goToPage(item.value!)"
+    >
+      {{ item.value }}
+    </span>
+    <span *ngIf="item.type === 'ellipsis'" class="page-ellipsis"> ... </span>
+  </ng-container>
+
+  <span
+    class="page-link"
+    [class.disabled]="currentPage === totalPages"
+    (click)="goToPage(currentPage + 1)"
+  >
+    Suivant
+  </span>
+</nav>

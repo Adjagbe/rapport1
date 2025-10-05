@@ -1,0 +1,32 @@
+export const DASHBOARD_ENDPOINTS = {
+  get_campagnes_global_stats: '/statistics/global',
+  get_campagne_details: '/statistics/by-campaign',
+  get_evolution_certification: '/statistics/campaign/evolution',
+  get_report_by_status: '/statistics/exportAccounts',
+  get_raport_csv: '/statistics/graphe_template',
+};
+
+export const COLORS_LISTS = [
+  '#F83CB0',
+  '#9D7AD8',
+  '#F54BAA',
+  '#FF5CC2',
+  '#FF73D1',
+  '#E940B5',
+  '#D92E9F',
+  '#C87FE2',
+  '#B066D4',
+  '#A655DD',
+  '#8E4BC3',
+  '#7A3DAA',
+  '#FF67BA',
+  '#FF7DD1',
+  '#FF96E0',
+  '#F262C1',
+  '#E148AD',
+  '#B37FE6',
+  '#A06AD6',
+  '#8C56C5',
+  '#7945B1',
+  '#653A9A',
+];

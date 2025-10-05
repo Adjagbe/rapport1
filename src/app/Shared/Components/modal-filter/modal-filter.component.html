@@ -1,0 +1,90 @@
+<app-modal></app-modal>
+<div class="modal-filter">
+  <div class="header-group">
+    <div class="text">Filtrer par</div>
+    <div class="hearder-btn">
+      <button
+        class="generic-btn border text"
+        [variante]="'tertiary'"
+        type="button"
+        (click)="resetFilter()"
+      >
+        Réinitialiser
+        <div class="reload-icon"></div>
+      </button>
+      <button
+        class="generic-btn text"
+        [variante]="'primary'"
+        type="button"
+        (click)="onFilterFormChange()"
+      >
+        Entrer
+        <div class="entrer-icon"></div>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <div class="filter-container">
+      <div class="d-flex gap-4">
+        <custom-select
+          [options]="columnOptions"
+          [formControl]="filterSelectController"
+          placeholder="Rechercher par"
+        >
+        </custom-select>
+        
+        <div class="w-50 d-flex gap-5" *ngIf="filterSelectController.value === 'isActive' ; else textInput">
+          <label class="d-flex align-items-center gap-3">
+            <input type="radio" [value]="true" [formControl]="filterInputController" /> 
+            <span>Actif</span>
+          </label>
+          <label class="d-flex align-items-center gap-3">
+            <input type="radio" [value]="false" [formControl]="filterInputController" /> 
+            <span>Inactif</span>
+          </label>
+        </div>
+
+        <ng-template #textInput>
+          <div class="w-50 d-flex gap-5" *ngIf="filterSelectController.value === 'isLock' || filterSelectController.value === 'statut'; else textInput1">
+            <label class="d-flex align-items-center gap-3">
+              <input type="radio" [value]="false" [formControl]="filterInputController" /> 
+              <span>Actif</span>
+            </label>
+            <label class="d-flex align-items-center gap-3">
+              <input type="radio" [value]="true" [formControl]="filterInputController" /> 
+              <span>Inactif</span>
+            </label>
+          </div>
+        </ng-template>
+
+        <ng-template #textInput1>
+          <div>
+            <span class="search-icon"></span>
+            <input
+              type="text"
+              [placeholder]="'Entrer une valeur'"
+              [formControl]="filterInputController"
+            />
+          </div>
+        </ng-template>
+
+        <!-- <div>
+          <span class="search-icon"></span>
+          <input
+            type="text"
+            [placeholder]="'Entrer une valeur'"
+            [formControl]="filterInputController"
+          />
+        </div> -->
+        <!-- <button
+                class="generic-btn"
+                [variante]="'tertiary'"
+                [text]="'Filtrer'"
+                type="button"
+                (click)="onFilterFormChange()"
+                *ngIf="filterSelectController.value" ></button> -->
+      </div>
+    </div>
+  </div>
+</div>

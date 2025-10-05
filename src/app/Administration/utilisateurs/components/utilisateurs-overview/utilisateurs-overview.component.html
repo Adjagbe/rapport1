@@ -1,0 +1,73 @@
+<div class="header-group" #headerGroup>
+  <div class="header-group__heading">
+    <h2>Administration</h2>
+  </div>
+<div>
+
+  <nav-administration />
+
+
+
+  
+<generic-table 
+  [datas]="listUser" 
+  [columns]="columnsUser" 
+  [totalItems]="count" 
+  [statusClr]="statusColors" 
+  [nameListe]="'utilisateurs'" 
+  [btnTextCreate]="'Ajouter un utilisateur'" 
+  [isViewDelete]="false" 
+  [isAction]="true" 
+  [isExport]="true"
+  [isViewUpdate]="true"
+  (onExportUser)="exportUsers()"
+  (onCreateUser)="onCreateUser()" 
+  (onFilterUser)="onFilterUser()"
+  (onSearch)="onSearch($event)"
+  (pageChange)="onPageChange($event)" 
+  (editClick)="onEditClick($event)"
+  (lockClick)="lockUtilisateur($event)" 
+  (unlockClick)="unlockUtilisateur($event)" 
+  (emitChangeFilter)="onFilterChanged($event)"
+  (utilisateurModifie)="refreshListeUtilisateur()"/>
+
+<pagination
+  [currentPage]="currentPage"
+  [totalItems]="count"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+></pagination> 
+  
+<!-- <pagination
+    [currentPage]="currentPage"
+    [totalItems]="count"
+    [pageSize]="pageSize"
+    (pageChange)="onPageChange($event)"
+  ></pagination> -->
+
+
+<!-- </div> -->
+<!-- <table-dt
+  [page]="index"
+  [columns]="columnsUser"
+  [statusClr]="statusColors"
+  [data]="listUser"
+  [pageSize]="pageSize"
+  [collectionSize]="count"
+  [isLoading]="isListUser"
+  [viewActionDelete]="'utilisateur'"
+  (pageChange)="onPageChange($event)"
+  (editClick)="onEditClick($event)"
+  (seeClick)="onSeeClick($event)"
+  (lockClick)="lockUtilisateur($event)"
+  (unlockClick)="unlockUtilisateur($event)"
+  (resendAccesClick)="resendAccesUser($event)"
+  [viewResendAcces]="viewResendAccesUser"
+ [listeViewBtnUpdate]="userListeActions"
+[listeViewBtnReact]="userListeActions"
+[listeViewBtnDesact]="userListeActions"
+[listeViewBtnVueInfos]="userListeActions"
+[listeViewInfos]="userListeActions"
+/> -->
+</div>
+</div>

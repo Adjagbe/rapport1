@@ -1,0 +1,111 @@
+:host {
+  display: block;
+  width: 100%;
+ 
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #fafbfc;
+  padding: 8px;
+  /* Retirer overflow: hidden pour permettre au radius d'être visible */
+  /* overflow: hidden; */
+  /* Ajouter une ombre légère pour mieux voir le radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.icon-trash{
+  cursor: pointer;
+}
+
+// .table-scroll-container {
+//   width: 100%;
+//   max-height: 900px;
+//   max-height: 400px; // sera override par l'input
+//   overflow-x: auto;
+//   overflow-y: auto;
+
+//   /* Chrome, Safari, Edge Chromium */
+//   &::-webkit-scrollbar {
+//     width: 0 !important;
+//     height: 0 !important;
+//     display: none !important;
+//     background: transparent !important;
+//   }
+
+//   /* Firefox */
+//   scrollbar-width: none !important;
+
+//   /* IE, Edge Legacy */
+//   -ms-overflow-style: none !important;
+// }
+
+table {
+  min-width: 200px; // optionnel, pour forcer le scroll horizontal si beaucoup de colonnes
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: white;
+  font-size: 15px;
+  border-radius: 12px;
+  border: 2px solid #f3f3f3; // ou la couleur de ton choix
+  overflow: hidden;
+  position: relative;
+}
+
+/* Arrondir les coins du tableau */
+table thead tr:first-child th:first-child {
+  border-top-left-radius: 12px;
+}
+table thead tr:first-child th:last-child {
+  border-top-right-radius: 12px;
+}
+table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+thead tr {
+  background: #fafbfc;
+}
+
+th,
+td {
+  padding: 16px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  font-weight: 700;
+  color: #222;
+  background: #fafbfc;
+  border-bottom: 1.5px solid #ececec;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+tbody tr:last-child {
+  border-bottom: none;
+}
+tbody tr:hover {
+  background: #f6f8fa;
+}
+
+.liste-vide{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

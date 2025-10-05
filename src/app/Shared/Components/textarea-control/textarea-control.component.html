@@ -1,0 +1,23 @@
+<label [for]="label" class="mt-3">
+  <div>
+    <span>{{
+      label ? label[0].toUpperCase() + label.slice(1).toLowerCase() : label
+    }}</span>
+    <span class="text-danger fw-bold" *ngIf="isRequired && label"> *</span>
+  </div>
+  <small *ngIf="subLabel">{{ subLabel }}</small>
+</label>
+
+<div class="textarea-div mt-2">
+  <ng-content />
+    <!-- <textarea
+    [attr.placeholder]="placeholder"
+    [rows]="rows"
+    formControlName="{{ value }}"
+    class="custom-textarea"
+  ></textarea> -->
+
+  <div class="{{ 'icon-container ' + from }}">
+    <ng-content select="[icon-slot]" />
+  </div>
+</div>

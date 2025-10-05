@@ -1,0 +1,215 @@
+<modal-layout
+  heading="Modifier la campagne"
+  subHeading="Modifiez les paramètres de votre campagne de certification"
+>
+  <ng-container>
+    <form [formGroup]="campagneForm" (ngSubmit)="onSub()">
+      <error-message
+        [errorMessage]="ErrorMsg"
+        *ngIf="
+          (showErrorMsg && campagneForm.invalid) || invalidFile || invalidDate
+        "
+      />
+      <!-- DIV FOR CAMPAGNE NAME -->
+      <div class="campagne_name">
+        <form-control label="Nom de la campagne">
+          <input
+            type="text"
+            id="Nom de la campagne"
+            placeholder="ex: Certification Q2 2025"
+            formControlName="name"
+            [readonly]="readonlyNameAndStart"
+          />
+        </form-control>
+        <small class="error-message">{{ nameError }}</small>
+      </div>
+      <!-- DIV FOR APPLIST -->
+      <div class="campagne_app">
+        <form-control
+          label="Applications à certifier"
+          subLabel="Recherchez et sélectionnez les applications, puis importez les fichiers d'utilisateurs pour chacune"
+        >
+          <ng-select
+            [items]="appSugestionsList"
+            bindLabel="label"
+            bindValue="value"
+            [multiple]="true"
+            [formControl]="selectedAppsControl"
+            [disabled]="readonlyApplications"
+          />
+        </form-control>
+        <small class="error-message">{{ applicationsError }}</small>
+        <div class="campagne_app-sugestions scroll-bar-hidden">
+          <span>Suggestions:</span>
+          <div>
+            <span
+              *ngFor="let app of appSugestionsList.slice(0, 4)"
+              (click)="readonlyApplications ? null : setSelectedSuggestion(app)"
+              [class.active]="selectedAppsControl.value!.includes(app.value)"
+              [class.disabled]="readonlyApplications"
+              [style.pointer-events]="readonlyApplications ? 'none' : 'auto'"
+              [style.opacity]="readonlyApplications ? '0.5' : '1'"
+              class="badge d-flex align-items-center gap-1"
+            >
+              <div
+                class="valid-icon"
+                *ngIf="selectedAppsControl.value!.includes(app.value)"
+              ></div>
+              <small>{{ app.label }}</small>
+            </span>
+          </div>
+        </div>
+        <div class="campagne_app-list">
+          <div class="campagne_empty" *ngIf="!Applications.length">
+            <div class="search-icon"></div>
+            <span
+              >Utilisez la barre de recherche ci-dessus pour ajouter des
+              applications</span
+            >
+          </div>
+          <div
+            class="campagne_fill scroll-bar-hidden"
+            *ngIf="Applications.controls.length"
+          >
+            <selected-app-card
+              *ngFor="let ctrl of Applications.controls; let i = index"
+              [name]="ctrl.value?.name ?? ''"
+              [fileName]="getDisplayFileName(ctrl)"
+            >
+              <div class="campagne_fill__actions">
+                <label
+                  [for]="'fileInput' + i"
+                  [class.disabled]="readonlyApplications"
+                  [style.pointer-events]="
+                    readonlyApplications ? 'none' : 'auto'
+                  "
+                  [style.opacity]="readonlyApplications ? '0.5' : '1'"
+                >
+                  <!-- Icône download pour les nouveaux fichiers -->
+                  <div
+                    class="download-icon"
+                    *ngIf="
+                      !ctrl.value?.File &&
+                      (!ctrl.value?.existingFiles ||
+                        ctrl.value?.existingFiles.length === 0)
+                    "
+                  ></div>
+
+                  <!-- Icône reload pour remplacer un fichier existant -->
+                  <div
+                    class="reload-icon"
+                    *ngIf="
+                      ctrl.value?.File ||
+                      (ctrl.value?.existingFiles &&
+                        ctrl.value?.existingFiles.length > 0)
+                    "
+                  ></div>
+                  <span>{{
+                    ctrl.value?.File
+                      ? "Remplacer"
+                      : ctrl.value?.existingFiles &&
+                        ctrl.value?.existingFiles.length > 0
+                      ? "Remplacer"
+                      : "Fichier"
+                  }}</span>
+                </label>
+                <input
+                  type="file"
+                  style="display: none"
+                  [id]="'fileInput' + i"
+                  [accept]="onlyExcelFile"
+                  (change)="onFileChange($event, ctrl)"
+                  #fileInput
+                  [disabled]="readonlyApplications"
+                />
+                <ng-container slot="preview">
+                  <span
+                    *ngIf="ctrl.value?.File"
+                    class="preview-btn"
+                    (click)="onPreviewFile(ctrl)"
+                  >
+                    <div class="preview-icon"></div>
+                  </span>
+
+                  <span
+                    *ngIf="
+                      !ctrl.value?.File &&
+                      ctrl.value?.existingFiles &&
+                      ctrl.value?.existingFiles.length > 0
+                    "
+                    class="preview-btn"
+                    (click)="onPreviewPreFillFile(ctrl)"
+                  >
+                    <div class="preview-icon"></div>
+                  </span>
+                </ng-container>
+                <button
+                  *ngIf="false"
+                  class="generic-btn"
+                  variante="tertiary muted sm"
+                  text="Prévisualisé"
+                  type="button"
+                  (click)="onPreviewFile(ctrl)"
+                ></button>
+                <div
+                  class="close-icon"
+                  (click)="readonlyApplications ? null : onRemove(ctrl)"
+                  [class.disabled]="readonlyApplications"
+                  [style.pointer-events]="
+                    readonlyApplications ? 'none' : 'auto'
+                  "
+                  [style.opacity]="readonlyApplications ? '0.5' : '1'"
+                ></div>
+              </div>
+            </selected-app-card>
+          </div>
+        </div>
+      </div>
+      <!-- DIV FOR DATES -->
+      <div class="campagne_date">
+        <div class="campagne_date-container">
+          <form-control label="Date de début">
+            <input
+              type="date"
+              id="Date début"
+              placeholder="ex: Certification Q2 2025"
+              formControlName="createdAt"
+              [readonly]="readonlyNameAndStart"
+              [min]="minCreatedAt"
+            />
+          </form-control>
+          <small class="error-message">{{ createdAtError }}</small>
+        </div>
+
+        <div class="campagne_date-container">
+          <form-control label="Date de fin (prévisionnelle)">
+            <input
+              type="date"
+              id="Date de fin (prévisionnelle)"
+              placeholder="ex: Certification Q2 2025"
+              formControlName="endAt"
+              [min]="minCreatedAt"
+            />
+          </form-control>
+          <small class="error-message">{{ endAtError }}</small>
+        </div>
+      </div>
+      <!-- DIV FOR BTN -->
+      <div class="campagne_btn-container">
+        <button
+          (click)="cancel()"
+          class="generic-btn"
+          variante="tertiary muted"
+          text="Annuler"
+          type="button"
+        ></button>
+        <button
+          class="generic-btn"
+          variante="primary"
+          text="Modifier la campagne"
+          type="submit"
+        ></button>
+      </div>
+    </form>
+  </ng-container>
+</modal-layout>

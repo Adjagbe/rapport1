@@ -1,0 +1,79 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-inline: 1rem;
+  padding-block: 0.75rem;
+  position: relative;
+
+  background-color: var(--clr-grey);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  & .wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  & .profil-picture {
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  & .user-infos {
+    &__full-name {
+      font-weight: 600;
+      display: inline-block;
+      margin-block-end: 0.625rem;
+    }
+  }
+
+  & div.three-dot-icon {
+    padding: 0.25rem;
+    border-radius: 9px;
+
+    &:hover {
+      background-color: var(--clr-primary-200);
+    }
+  }
+
+  & .actions-menu {
+    position: absolute;
+    right: -285px;
+    top: -120px;
+    border-radius: 12px;
+    border: 2px solid #f6f6f6;
+    background: #fdfdfd;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.11);
+    z-index: 1000;
+
+    padding: 0.5rem;
+  }
+
+  & .action-menu {
+    display: flex;
+    flex-direction: column;
+    align-content: start;
+    gap: 1rem;
+    &__action {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--clr-grey);
+      }
+
+      &.logout {
+        color: var(--clr-red);
+      }
+    }
+  }
+}

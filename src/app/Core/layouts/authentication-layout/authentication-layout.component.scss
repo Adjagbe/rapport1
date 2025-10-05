@@ -1,0 +1,40 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(64px, 1fr));
+  height: 100vh;
+
+  & brand {
+    grid-column: span 6;
+  }
+
+  & .left-side,
+  & .right-side {
+    height: 100%;
+    padding-inline: 1.875rem;
+    padding-block: 1.875rem;
+  }
+
+  & .left-side {
+    grid-column: span 6;
+    background-color: var(--clr-grey);
+  }
+
+  & .right-side {
+    grid-column: span 6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.image img {
+    width: 80%;
+    height: 100%;
+    object-fit: cover;
+}

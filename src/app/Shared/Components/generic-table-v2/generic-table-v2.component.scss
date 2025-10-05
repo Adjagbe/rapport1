@@ -1,0 +1,211 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 869px;
+  overflow: scroll;
+  /* Masquer la barre de défilement */
+  &::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+  -ms-overflow-style: none !important; /* IE et Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #fafbfc;
+  padding: 8px;
+  /* Retirer overflow: hidden pour permettre au radius d'être visible */
+  /* overflow: hidden; */
+  /* Ajouter une ombre légère pour mieux voir le radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.table-scroll-container {
+  width: 100%;
+  max-height: 400px;
+  max-height: 400px; // sera override par l'input
+  overflow-x: auto;
+  overflow-y: auto;
+  border: 2px solid rgb(215, 215, 215); // ou la couleur de ton choix
+}
+
+table {
+  min-width: 900px; // optionnel, pour forcer le scroll horizontal si beaucoup de colonnes
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: white;
+  font-size: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Arrondir les coins du tableau */
+table thead tr:first-child th:first-child {
+  border-top-left-radius: 12px;
+}
+table thead tr:first-child th:last-child {
+  border-top-right-radius: 12px;
+}
+table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 12px;
+}
+table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 12px;
+}
+
+table tbody span {
+  font-size: 13px;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+thead tr {
+  background: #fafbfc;
+}
+
+th,
+td {
+  padding: 16px 12px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+th {
+  font-weight: 700;
+  color: #222;
+  background: #fafbfc;
+  border-bottom: 1.5px solid #ececec;
+}
+
+tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+tbody tr:last-child {
+  border-bottom: none;
+}
+tbody tr:hover {
+  background: #f6f8fa;
+}
+
+.badge-waiting {
+  background: #fff3cd;
+  color: #b8860b;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.badge-success {
+  background: #d1f7e7;
+  color: #1a7f37;
+  border-radius: 6px;
+  padding: 4px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.btn-certify {
+  background: #ff8200;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 22px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-certify:hover {
+  background: #e66e00;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  th,
+  td {
+    padding: 10px 6px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 600px) {
+  .table-responsive {
+    padding: 2px;
+  }
+  table {
+    font-size: 12px;
+  }
+  th,
+  td {
+    padding: 7px 3px;
+  }
+}
+
+:host {
+  & .table-heading {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-block-end: 2.1rem;
+
+    & .filter-container {
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      justify-content: space-between;
+    }
+
+    & .text-container span {
+      font-weight: 600;
+    }
+
+    & .text-container {
+      display: flex;
+      align-items: center;
+      gap: 0.675rem;
+      & small {
+        color: var(--clr-dark);
+      }
+    }
+
+    & .filter-container {
+      margin-block-start: 1rem;
+    }
+
+    & .filter-container select {
+      background: transparent;
+      border: 2px solid rgb(215, 215, 215);
+      border-radius: 8px;
+      display: block;
+      width: max-content;
+      padding: 0.612rem 1rem;
+      font-family: "Roboto" !important;
+    }
+
+    & .filter-container input {
+      background: transparent;
+      border: 2px solid rgb(215, 215, 215) !important;
+      border-radius: 8px;
+      display: block;
+      padding: 0.612rem 1rem;
+      min-width: 200px;
+    }
+
+    & .filter-container select[formControlName="filterStatusController"] {
+      min-width: 150px;
+    }
+  }
+}

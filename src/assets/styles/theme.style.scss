@@ -1,0 +1,32 @@
+:root {
+  --clr-grey: rgb(234, 234, 234);
+  --clr-grey-100: rgba(234, 234, 234, 0.5);
+  --clr-primary: rgb(254, 121, 0);
+  --clr-primary-100: rgb(255, 249, 244);
+  --clr-primary-200: rgba(255, 209, 168, 1);
+  --clr-dark: rgba(0, 0, 0, 1);
+  --clr-dark-900: rgba(38, 38, 38, 1);
+  --clr-red-100: rgba(255, 18, 18, 0.2);
+  --clr-red: rgba(255, 18, 18, 1);
+  --clr-green-100: rgba(238, 251, 243, 1);
+  --clr-green: rgba(40, 161, 105, 1);
+  --clr-green-900: rgba(40, 161, 105, 1);
+  --clr-green-950: rgba(80, 190, 135, 1);
+  --clr-green-100: rgba(80, 190, 135, 0.12);
+  --clr-green-100: rgb(238, 251, 243);
+  --clr-blue-50: rgba(241, 249, 254, 1);
+  --clr-blue-100: rgb(241, 249, 254);
+  --clr-blue-200: rgba(75, 181, 230, 1);
+  --clr-blue-500: rgba(35, 154, 212, 1);
+  --clr-blue-600: rgba(21, 124, 180, 1);
+  --clr-yellow-100: rgba(250, 185, 0, 0.12);
+  --clr-yellow-500: rgba(250, 185, 0, 1);
+  --clr-yellow-900: rgba(250, 185, 0, 1);
+  --clr-violet-500: rgba(145, 100, 205, 1);
+
+  --bp-mobile: 480px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1024px;
+  --bp-large: 1200px;
+  --bp-xl: 1440px;
+}

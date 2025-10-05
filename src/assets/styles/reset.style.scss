@@ -1,0 +1,124 @@
+/* Règles de box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Ajout d'une transition douce pour toutes les propriétés modifiées */
+  transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: "Roboto" !important;
+}
+
+/* Scrollbars globaux ultra-fins */
+* {
+  /* Firefox */
+  scrollbar-width: thin;
+}
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Suppression des marges par défaut */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: 0px !important;
+  font-family: "Roboto" !important;
+}
+
+/* Suppression des styles de liste sur les ul, ol avec un rôle list */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Définition des valeurs par défaut du root */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Valeurs par défaut du body */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Roboto" !important;
+  font-weight: 400;
+}
+
+/* Styles par défaut pour les liens sans classe */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--clr-dark);
+  font-family: "Roboto" !important;
+}
+select,
+option {
+  background-color: #fff;
+}
+
+/* Facilite la gestion des images */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Hérite la police pour les inputs et boutons */
+input,
+button,
+textarea,
+select,
+option {
+  font: inherit !important;
+  font-family: "Roboto" !important;
+}
+
+/* Désactive les animations et transitions pour les personnes qui préfèrent les réduire */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,59 @@
+<div class="header-group" #headerGroup>
+  <div class="header-group__heading">
+    <h2>Administration</h2>
+  </div>
+<div>
+
+  <nav-administration />
+  
+<generic-table 
+  [datas]="listAction" 
+  [columns]="columnsAction" 
+  [totalItems]="count" 
+  [statusClr]="statusColors" 
+  [nameListe]="'actions'" 
+  [btnTextCreate]="'Ajouter une action'" 
+  [isViewDelete]="false" 
+  [isAction]="true" 
+  [isExport]="false"
+  [isViewUpdate]="true"
+  (onCreateUser)="onCreateProfilClick()" 
+  (onFilterUser)="onFilterAction()"
+  (onSearch)="onSearch($event)"
+  (editClick)="onEditClick($event)" 
+  (lockClick)="lockAction($event)" 
+  (unlockClick)="unlockAction($event)" 
+  (emitChangeFilter)="onFilterChanged($event)"
+  />
+
+<pagination
+  [currentPage]="currentPage"
+  [totalItems]="count"
+  [pageSize]="pageSize"
+  (pageChange)="onPageChange($event)"
+></pagination> 
+<!-- </div> -->
+<!-- <table-dt
+  [page]="index"
+  [columns]="columnsUser"
+  [statusClr]="statusColors"
+  [data]="listUser"
+  [pageSize]="pageSize"
+  [collectionSize]="count"
+  [isLoading]="isListUser"
+  [viewActionDelete]="'utilisateur'"
+  (pageChange)="onPageChange($event)"
+  (editClick)="onEditClick($event)"
+  (seeClick)="onSeeClick($event)"
+  (lockClick)="lockUtilisateur($event)"
+  (unlockClick)="unlockUtilisateur($event)"
+  (resendAccesClick)="resendAccesUser($event)"
+  [viewResendAcces]="viewResendAccesUser"
+ [listeViewBtnUpdate]="userListeActions"
+[listeViewBtnReact]="userListeActions"
+[listeViewBtnDesact]="userListeActions"
+[listeViewBtnVueInfos]="userListeActions"
+[listeViewInfos]="userListeActions"
+/> -->
+</div>
+</div>

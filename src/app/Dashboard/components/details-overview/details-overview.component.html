@@ -1,0 +1,291 @@
+<div class="heading-groupe">
+  <div class="heading-groupe-container">
+    <div style="display: flex; align-items: center">
+      <div [routerLink]="['/dashboard']" class="pointer back-btn">
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 25 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.325 13.5L13.925 19.1L12.5 20.5L4.5 12.5L12.5 4.5L13.925 5.9L8.325 11.5H20.5V13.5H8.325Z"
+            fill="black"
+          />
+        </svg>
+      </div>
+      <h2>{{ campagneName }}</h2>
+    </div>
+    <span style="margin-inline-start: 1rem"
+      >Statistiques détaillées de la campagne</span
+    >
+  </div>
+  <button
+    *HasPermission="'EXTRATION_DONNEE'"
+    class="generic-btn"
+    variante="primary"
+    text="Extraire les donnés"
+    type="button"
+  >
+    <div class="plus-component"></div>
+  </button>
+</div>
+<div class="infos-cards">
+  <ng-container *ngFor="let card of campagneInfoCards">
+
+   <ng-container *HasPermission="'CARD_TOTAL_COMPTES_UTILISATEUR'">
+     <campagne-info-card
+        *ngIf="card.label === 'Total des comptes utilisateur'"
+        [label]="card.label"
+        [value]="card.value"
+        [type]="card.type"
+      >
+        <div class="users-icon"></div>
+      </campagne-info-card>
+   </ng-container>
+
+   <ng-container *HasPermission="'CARD_COMPTES_CERTIFIES'">
+      <campagne-info-card
+        *ngIf="card.label === 'Comptes Certifiés'"
+        [label]="card.label"
+        [value]="card.value"
+        [type]="card.type"
+      >
+        <div class="positive-icon"></div>
+      </campagne-info-card>
+    </ng-container>
+
+    <ng-container *HasPermission="'CARD_COMPTES_NON_CERTIFIES'">
+      <campagne-info-card
+        *ngIf="card.label === 'Comptes non certifiés'"
+        [label]="card.label"
+        [value]="card.value"
+        [type]="card.type"
+      >
+        <div class="negative-icon"></div>
+      </campagne-info-card>
+    </ng-container>
+
+    <ng-container *HasPermission="'CARD_TAUX_REPONSE'">
+      <campagne-info-card
+        *ngIf="card.label === 'Taux réponse'"
+        [label]="card.label"
+        [value]="card.value"
+        [type]="card.type"
+        [unit]="'%'"
+      >
+        <div class="up-icon"></div>
+      </campagne-info-card>
+    </ng-container>
+
+  </ng-container>
+</div>
+
+<div class="campagne-analytics-container">
+
+  <container-card
+    *HasPermission="'PROGRESSION_CERTIFICATION'"
+    title="Progression de la certification"
+    description="Avancement général de la campagne"
+  >
+    <div class="content__progress-bar">
+      <div class="content__progress-bar-header">
+        <span class="content__progress-bar-header-title">Progression</span>
+        <span class="content__progress-bar-header-value"
+          >{{
+            campagneDetails?.certificationRate ?? 0 | number : "1.0-0"
+          }}%</span
+        >
+      </div>
+      <div class="content__progress-bar-content">
+        <div
+          class="content__progress"
+          [style.width]="
+            (campagneDetails?.certificationRate ?? 1 | number : '1.0-0') + '%'
+          "
+        ></div>
+      </div>
+      <div class="content__progress-bar-footer">
+        <span class="content__progress-bar-footer-text"
+          >{{ campagneDetails?.certifiedAccounts ?? 0 }} /
+          {{ campagneDetails?.totalAccounts ?? 0 }} comptes certifiés</span
+        >
+      </div>
+    </div>
+    <div class="global-infos">
+      <div class="global-infos__rest-account">
+        <span>Compte restant</span>
+        <span>{{ campagneDetails?.notCertifiedAccounts ?? 0 }}</span>
+      </div>
+      <div class="global-infos__total-apps">
+        <span>Total Application</span>
+        <span>{{ campagneDetails?.totalApplications ?? 0 }}</span>
+      </div>
+    </div>
+  </container-card>
+
+  <!-- space -->
+  <container-card
+    *HasPermission="'STATUT_COMPTES'"
+    title="Statut des comptes"
+    description="Comptes nécessitant des actions particulières"
+  >
+    <status-card
+      iconClass="blue"
+      [value]="campagneDetails?.mobilityAccounts ?? null"
+      label="Compte utilisateur en mobilité interne"
+      subLabel="Changements de poste/direction"
+    >
+      <ng-container>
+        <div class="arrow-up-icon pointer"></div>
+      </ng-container>
+      <ng-container slot="download">
+        <div
+          (click)="exportReport('MOVED_DEPARTMENT')"
+          class="export-icon"
+        ></div>
+      </ng-container>
+    </status-card>
+    <status-card
+      iconClass="danger"
+      [value]="campagneDetails?.toDeactivateAccounts ?? null"
+      label="Compte utilisateur en sortie d’effectif"
+      subLabel="Personnel ayant quitté l'entreprise"
+    >
+      <ng-container>
+        <div class="user-error-icon pointer"></div>
+      </ng-container>
+      <ng-container slot="download">
+        <div (click)="exportReport('TO_DEACTIVATE')" class="export-icon"></div>
+      </ng-container>
+    </status-card>
+    <status-card
+      iconClass="grey"
+      [value]="campagneDetails?.profileChangeNeededAccounts ?? null"
+      label="Compte utilisateur avec modification de profil"
+      subLabel="Changements d'habilitations"
+    >
+      <ng-container>
+        <div class="user-edit-icon pointer"></div>
+      </ng-container>
+      <ng-container slot="download">
+        <div
+          (click)="exportReport('PROFILE_CHANGE_NEEDED')"
+          class="export-icon"
+        ></div>
+      </ng-container>
+    </status-card>
+    <status-card
+      iconClass="yellow"
+      [value]="campagneDetails?.ihaveNotIdea ?? null"
+      label="Comptes à investiguer"
+      subLabel="Changements d'habilitations"
+    >
+      <ng-container>
+        <div class="user-warning-icon pointer"></div>
+      </ng-container>
+      <ng-container slot="download">
+        <div (click)="exportReport('PENDING')" class="export-icon"></div>
+      </ng-container>
+    </status-card>
+  </container-card>
+
+  <container-card 
+    *HasPermission="'REPARTITION_CERTIFICATIONS'" title="Répartition des certifications">
+    <ng-container>
+      <app-multi-type-chart
+        [chartId]="'certification-distribution-chart'"
+        [type]="'pie'"
+        [datas]="certificationDistributionData"
+        [centerValue]="campagneDetails?.totalApplications?.toString() ?? '--'"
+      ></app-multi-type-chart>
+    </ng-container>
+  </container-card>
+
+  <container-card
+    *HasPermission="'EVOLUTION_CERTIFICATION_PAR_DIRECTION'"
+    title="Évolution de la certification par direction"
+    [filter]="filterByGranularity"
+    (filterChange)="onFilterChange($event)"
+  >
+    <ng-container>
+      <app-multi-type-chart
+        [chartId]="'evolution-direction-chart'"
+        [type]="'spline'"
+        [datas]="evolutionData"
+        [unity]="''"
+      ></app-multi-type-chart>
+    </ng-container>
+  </container-card>
+
+  <!-- SECTION TWO -->
+  <container-card 
+    *HasPermission="'TAUX_REPONSE_PAR_DIRECTION'" 
+    title="Taux de réponse par direction">
+    <div class="progress-list-container">
+      <div class="progress-item" *ngFor="let item of tauxReponseDirectionList">
+        <div class="progress-item__header">
+          <span class="progress-item__label">{{ item.label }}</span>
+          <span class="progress-item__value">{{ item.value }}%</span>
+        </div>
+        <div class="progress-item__bar">
+          <div
+            class="progress-item__bar-fill"
+            [style.width]="item.value + '%'"
+            [style.background-color]="item.color || '#E91E63'"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </container-card>
+
+  <!-- space -->
+  <container-card
+   *HasPermission="'TAUX_RÉPONSE_PAR_PLATEFORME'" 
+   title="Taux de réponse par plateforme">
+    <div class="progress-list-container purple">
+      <div class="progress-item" *ngFor="let item of tauxReponsePlateformeList">
+        <div class="progress-item__header">
+          <span class="progress-item__label">{{ item.label }}</span>
+          <span class="progress-item__value">{{ item.value }}%</span>
+        </div>
+        <div class="progress-item__bar">
+          <div
+            class="progress-item__bar-fill"
+            [style.width]="item.value + '%'"
+            [style.background-color]="item.color || '#9C27B0'"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </container-card>
+
+  <!-- SECTION THREE -->
+  <container-card 
+    *HasPermission="'CERTIFICATION_PAR_DIRECTION'" 
+    title="Certification par la direction">
+    <ng-container>
+      <app-multi-type-chart
+        [chartId]="'certification-direction-chart'"
+        [type]="'column'"
+        [datas]="certificationDirectionData"
+        [unity]="' comptes'"
+      ></app-multi-type-chart>
+    </ng-container>
+  </container-card>
+
+  <container-card 
+    *HasPermission="'CERTIFICATION_PAR_PLATEFORME'" 
+    title="Certification par plateforme">
+    <ng-container>
+      <app-multi-type-chart
+        [chartId]="'certification-plateforme-chart'"
+        [type]="'column'"
+        [datas]="certificationPlateformeData"
+        [unity]="' comptes'"
+      ></app-multi-type-chart>
+    </ng-container>
+    <!-- SECTION FOUR -->
+  </container-card>
+</div>

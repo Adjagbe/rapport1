@@ -1,0 +1,33 @@
+:host {
+  display: grid;
+  grid-template-columns: minmax(0, 382px) 1fr;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-grey);
+  padding: 0.625rem;
+  position: relative;
+
+  & .left-side {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+
+    &__badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    &__file-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__file-name span {
+      color: var(--clr-green);
+      font-size: 0.812rem;
+    }
+  }
+}

@@ -1,0 +1,174 @@
+<!-- <h2>
+  {{
+  btnSubmitText === "Enregistrer"
+  ? USERS_TEXTS.NEW_USER_FORM.NEW_USER_FORM_HEADING
+  : USERS_TEXTS.NEW_USER_FORM.EDIT_USER_FORM_HEADING
+  }}
+</h2> -->
+<!-- <h2 class="header">
+  {{
+  btnSubmitText === "Enregistrer"
+  ? "Créer un nouveau utilisateur"
+  : "Modifier un utilisateur"
+  }}
+  <div class="close-icon" (click)="close()"></div>
+</h2> -->
+<modal-layout
+  [heading]="btnSubmitText === 'Créer un utilisateur' ? 'Créer un nouveau utilisateur' : 'Modifier un utilisateur'"
+  subHeading=""
+>
+<form class="form-main" [formGroup]="newUtilisateurFormulaire" (ngSubmit)="OnSubmit()">
+  <div class="container-form ">
+
+    <div class="ldapBox">
+      <div class="d-flex justify-content-between align-items-center ">
+        <label class="fw-bold text-sm">Utilisateur windows</label>
+        <label class="switch">
+          <input type="checkbox" name="ldap"  formControlName="ldap" (change)="switchLdap()">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="form-groupes gap-3 mb-3" style="gap: 20px;"
+        *ngIf="newUtilisateurFormulaire.controls['ldap'].value == true">
+        <div style="width: 100%;">
+          <label for="login-ldap" class="form-label">Login windows</label> <span class="text-danger"> *</span>
+          <div class="input-wrapper">
+            <input type="text" formControlName="login" class="input-ldap" placeholder="Entrez un login windows"
+              (ngModelChange)="cleanInputUserLdap()" />
+            <div class="d-flex align-items-center" class="btnSearch">
+              <svg width="24" height="25" viewBox="0 0 24 25" class="icon-inside" fill="none"
+                xmlns="http://www.w3.org/2000/svg" *ngIf="!searchUserLdap">
+                <path
+                  d="M18.7556 20.5L13.1556 14.9C12.7111 15.2556 12.2 15.537 11.6222 15.7444C11.0444 15.9519 10.4296 16.0556 9.77778 16.0556C8.16296 16.0556 6.7963 15.4963 5.67778 14.3778C4.55926 13.2593 4 11.8926 4 10.2778C4 8.66296 4.55926 7.2963 5.67778 6.17778C6.7963 5.05926 8.16296 4.5 9.77778 4.5C11.3926 4.5 12.7593 5.05926 13.8778 6.17778C14.9963 7.2963 15.5556 8.66296 15.5556 10.2778C15.5556 10.9296 15.4519 11.5444 15.2444 12.1222C15.037 12.7 14.7556 13.2111 14.4 13.6556L20 19.2556L18.7556 20.5ZM9.77778 14.2778C10.8889 14.2778 11.8333 13.8889 12.6111 13.1111C13.3889 12.3333 13.7778 11.3889 13.7778 10.2778C13.7778 9.16667 13.3889 8.22222 12.6111 7.44444C11.8333 6.66667 10.8889 6.27778 9.77778 6.27778C8.66667 6.27778 7.72222 6.66667 6.94444 7.44444C6.16667 8.22222 5.77778 9.16667 5.77778 10.2778C5.77778 11.3889 6.16667 12.3333 6.94444 13.1111C7.72222 13.8889 8.66667 14.2778 9.77778 14.2778Z"
+                  fill="#FF7900" />
+              </svg>
+
+              <button type="button" class="btn-inside" (click)="getUserLdap()">Rechercher</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-groupes-noladap  mb-3" 
+        *ngIf="newUtilisateurFormulaire.controls['ldap'].value == false">
+        <div style="width: 100%;">
+          <label for="login-no-ldap" class="form-label">Login </label><span class="text-danger"> *</span>
+          <div class="input-wrapper">
+            <input type="text" formControlName="login" class="input-no-ldap input-login input-bordered"
+              id="login-no-ldap" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="form-groupe">
+      <form-control label="Nom">
+        <input type="text" formControlName="lastName" id="" />
+      </form-control>
+      <form-control label="Prenom">
+        <input type="text" formControlName="firstName" id="" />
+      </form-control>
+      <form-control label="Email">
+        <input type="email" formControlName="email" id="" />
+      </form-control>
+      <form-control label="TELEPHONE">
+        <input type="text" formControlName="telephone" id="" />
+      </form-control>
+      <form-control label="FONCTION">
+        <input type="text" formControlName="fonction" id="" />
+      </form-control>
+      <form-control label="DIRECTION">
+        <ng-select  [notFoundText]="'Aucun élément trouvé'"  formControlName="idDepartment">
+          <ng-option [value]="null" disabled selected  >-- Sélectionner une direction --</ng-option>
+          <ng-option  *ngFor="let item of liste?.items" [value]="item.idDepartment">{{ item.name }}</ng-option>
+        </ng-select>
+      </form-control>
+
+      <!-- <div class="filter-options" >
+        <label>Filtrer par département ?</label>
+        <div class="options">
+          <label class="d-flex">
+            <input type="radio" formControlName="filterByDirection" [value]="true" />
+           <label class="space-label"> Oui</label>
+          </label>
+
+          <label class="d-flex">
+            <input type="radio" formControlName="filterByDirection" [value]="false" />
+            <label class="space-label"> Non</label>
+          </label>
+        </div>
+      </div> -->
+
+     
+
+      <!-- <form-control label="SOUS_DIRECTION" [isRequired]="false"
+        *ngIf="newUtilisateurFormulaire.controls['direction'].value">
+        <ng-select formControlName="sousDirection" (change)="OnChangeSousDirection()">
+          <ng-option *ngFor="let item of listSousDirections" [value]="item.id">{{ item.libelle }}</ng-option>
+        </ng-select>
+      </form-control>
+      <form-control label="DEPARTEMENT" [isRequired]="false"
+        *ngIf="newUtilisateurFormulaire.controls['sousDirection'].value">
+        <ng-select formControlName="departement" (change)="OnChangeDepartement()">
+          <ng-option *ngFor="let item of listDepartements" [value]="item.id">{{ item.libelle }}</ng-option>
+        </ng-select>
+      </form-control>
+      <form-control label="SERVICE" [isRequired]="false" *ngIf="newUtilisateurFormulaire.controls['departement'].value">
+        <ng-select formControlName="service">
+          <ng-option *ngFor="let item of listServices" [value]="item.id">{{ item.libelle }}</ng-option>
+        </ng-select>
+      </form-control> -->
+    </div>
+
+    <div class="form-groupe mt-3 gestion-profil">
+      <div class="">
+        <h2 class="m-1">Gestion des profils</h2>
+        <form class="mt-2" [formGroup]="newProfilFormulaire" (ngSubmit)="AjoutProfil()">
+          <form-control label="PROFIL">
+            <ng-select formControlName="profil">
+              <ng-option *ngFor="let profil of listProfil" 
+                [value]="profil" [disabled]="isProfilSelected(profil)"
+                >
+                {{ profil.libelle }}
+              </ng-option>
+            </ng-select>
+          </form-control>
+          <form-control class="mt-2" label="DATE DE DEBUT PROFIL" [isRequired]="false">
+            <input type="date" formControlName="dateDebut" id="" [min]="minDate"/>
+          </form-control>
+          <form-control class="mt-2" label="DATE DE FIN PROFIL" [isRequired]="false">
+            <input type="date"  formControlName="dateFin" id="" [min]="minDateDebutProfil" value="" />
+          </form-control>
+          <div class="btn-container">
+            <!-- <button cta-button type="btn-primary" size="sm" [disabled]="newProfilFormulaire.invalid">
+              <ng-container slot="text-slot">
+                <p class="text-slot">{{ USERS_TEXTS.NEW_USER_FORM.SUBMIT_BTN_PROFIL }}</p>
+              </ng-container>
+            </button> -->
+            <!-- <button class="generic-btn" variante="tertiary" text="Retour" type="button" (click)="close()"></button> -->
+            <button class="generic-btn" variante="secondary" text="Affecter le profil" type="submit" [disabled]="newProfilFormulaire.invalid"></button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form">
+        <h2 class="m-1">Profils attribués</h2>
+        <div class="contain-table">
+          <app-generic-table-v3 [datas]="paginatedDataProfil" [columns]="columnsProfil" [totalItems]="count" [isViewDelete]="true" [isAction]="true" [isViewUpdate]="false" (pageChange)="onPageChange($event)" (deleteClick)="onDeleteClick($event)"/>
+          <!-- <generic-table [page]="index" [columns]="columnsProfil" [data]="paginatedDataProfil" [pageSize]="pageSize"
+          [collectionSize]="count" [isLoading]="isListProfil" [viewActionDelete]="'profil'"
+          (pageChange)="onPageChange($event)" (deleteClick)="onDeleteClick($event)" [listeViewInfos]="userListeActions" /> -->
+          <!-- <generic-table [datas]="listRole" [columns]="columnsProfil" [statusClr]="statusColors" [nameListe]="'profils'" [btnTextCreate]="'Ajouter un profil'" (onCreateUser)="onCreateProfilClick()"/> -->
+        </div>
+      </div>
+    
+      
+    </div>
+
+  </div>
+
+  <div class="footer-btn">
+      <button class="generic-btn close-btn" variante="tertiary" text="Annuler" type="button" (click)="close()"></button>
+      <button class="generic-btn " variante="primary" [text]="btnSubmitText" type="submit" [disabled]="newUtilisateurFormulaire.invalid"></button>
+  </div>
+</form>

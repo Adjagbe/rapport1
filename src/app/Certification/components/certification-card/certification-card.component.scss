@@ -1,0 +1,92 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
+  border-radius: 8px;
+  border-radius: 8px;
+  outline: 2px solid rgb(215, 215, 215);
+  padding-block: 0.62rem;
+  padding-inline: 0.72rem;
+  gap: 0.625rem;
+
+  &.active {
+    outline: 2px solid var(--clr-primary);
+    background-color: var(--clr-primary-100);
+  }
+
+  &:hover:not(.active) {
+    outline: 1px solid var(--clr-dark);
+    cursor: pointer;
+  }
+
+  & .campagne-action {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  & .campagne-details {
+    display: grid;
+    align-content: start;
+    gap: 0.625rem;
+
+    &__heading {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+    }
+
+    &__heading span:nth-child(1) {
+      font-weight: 600;
+    }
+
+    &__heading span:nth-child(2) {
+      border-radius: 99px;
+      background-color: var(--clr-grey);
+      padding-block: 6px;
+      padding-inline: 0.625rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+
+      &.cloture {
+        background-color: #f1f9fe;
+        color: #239ad4;
+      }
+
+      &.desactive {
+        background-color: rgba(251, 229, 229, 1);
+        color: rgba(255, 18, 18, 1);
+      }
+
+      &.planifier {
+        background-color: #f7f5fd;
+        color: #9164cd;
+      }
+
+      &.en-cours {
+        background-color: var(--clr-green-100);
+        color: var(--clr-green);
+      }
+
+      &.termine {
+        background-color: #e7e7e7;
+        color: var(--clr-dark);
+      }
+    }
+
+    &__applist div {
+      display: none;
+      align-items: center;
+      gap: 0.625rem;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+
+    &__applist > span {
+      margin-block-start: 0.5rem;
+    }
+  }
+}

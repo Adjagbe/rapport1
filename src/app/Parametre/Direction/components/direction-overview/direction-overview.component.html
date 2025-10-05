@@ -1,0 +1,47 @@
+<div class="header-group" #headerGroup>
+  <div class="header-group-heading">
+    <div class="header-group-title">
+      <h2>Interface des paramétrages</h2>
+      <p>
+        Gérez les paramètres : ajouter, modifier et/ou supprimer les
+        directions
+      </p>
+    </div>
+  </div>
+
+  <div>
+
+    <nav-parametrage />
+
+    <generic-table
+      [datas]="listDirection"
+      [totalItems]="count" 
+      [nameListe]="'Directions'"
+      [btnTextCreate]="'Ajouter une direction'"
+      [isViewDelete]="true" 
+      [isAction]="true" 
+      [isViewUpdate]="true"
+      [columns]="columnsDirection"
+      [totalItems]="count" 
+      [statusClr]="statusColors" 
+      (onSearch)="onSearch($event)"
+      (pageChange)="onPageChange($event)" 
+      (onFilterUser)="onFilterDirection()"
+      (onCreateUser)="onCreateDirection()" 
+      (editClick)="onEditDirection($event)" 
+      (deleteClick)="onDeleteClick($event)"
+      (emitChangeFilter)="onFilterChanged($event)"
+      (lockClick)="lockDirection($event)" 
+      (unlockClick)="unlockDirection($event)" 
+    />
+    <pagination
+      [currentPage]="currentPage"
+      [totalItems]="count"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)"
+    ></pagination> 
+  </div>
+  
+
+
+</div>
